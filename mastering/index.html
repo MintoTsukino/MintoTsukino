@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マスタリングカウンター — みんと食堂</title>
+<meta name="description" content="曲間の表情を残したまま、アルバム丸ごと同じ味へ整えるブラウザ完結の無料マスタリングツール。">
+<meta property="og:title" content="マスタリングカウンター — みんと食堂">
+<meta property="og:description" content="全曲へ同じ仕上げを。音声は送信せず、ブラウザ内だけで処理します。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mintotsukino.github.io/MintoTsukino/mastering/">
+<meta property="og:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header class="noren">
+  <div class="noren-inner">
+    <a href="../" class="brand">
+      <span class="brand-mark">🏮</span>
+      <div>
+        <div class="brand-name">みんと食堂</div>
+        <div class="brand-sub">MINTO TSUKINO &middot; VST PLUGINS</div>
+      </div>
+    </a>
+    <nav class="nav" aria-label="メインナビゲーション">
+      <a href="../">本日のメニュー</a>
+      <a href="../about/">お品書き</a>
+      <a href="../about/#contact">連絡先</a>
+    </nav>
+  </div>
+</header>
+
+<main class="counter-main">
+  <section class="counter-hero">
+    <div class="hero-eyebrow">Browser · Mastering Counter</div>
+    <h1>アルバム丸ごと、<br><span>同じ味で。</span></h1>
+    <p>
+      曲間の表情を残したまま、全曲を一つの仕上がりへ整える、<br>
+      ブラウザ完結のマスタリングカウンター。
+    </p>
+    <div class="hero-badges" aria-label="特徴">
+      <span>追加インストール不要</span>
+      <span>音声データ送信なし</span>
+      <span>WAV 24-bit / 48 kHz</span>
+    </div>
+  </section>
+
+  <div id="app-status" class="app-status" data-state="ready" role="status" aria-live="polite">
+    食材を運び込むと、アルバムの仕込みを始めます。
+  </div>
+
+  <section class="counter-step" id="upload-section" aria-labelledby="upload-title">
+    <div class="step-heading">
+      <span class="step-number">01</span>
+      <div>
+        <p class="step-kicker">Bring your tracks</p>
+        <h2 id="upload-title">食材を運び込む</h2>
+      </div>
+    </div>
+
+    <div id="drop-zone" class="drop-zone" aria-describedby="drop-help">
+      <span class="drop-icon" aria-hidden="true">🎧</span>
+      <strong>フォルダか音声ファイルをここへドロップ</strong>
+      <span id="drop-help">WAV / MP3 / AAC / M4A / FLAC / OGG</span>
+      <div class="button-row">
+        <button class="counter-button secondary" id="choose-files" type="button">ファイルを選ぶ</button>
+        <button class="counter-button secondary" id="choose-folder" type="button">フォルダを選ぶ</button>
+      </div>
+      <input id="file-input" type="file" accept="audio/*,.wav,.mp3,.m4a,.aac,.flac,.ogg" multiple hidden>
+      <input id="folder-input" type="file" accept="audio/*,.wav,.mp3,.m4a,.aac,.flac,.ogg" webkitdirectory multiple hidden>
+    </div>
+
+    <div id="file-warning" class="notice warning" hidden></div>
+
+    <div class="track-panel">
+      <div class="panel-toolbar">
+        <div>
+          <h3>読み込み済み</h3>
+          <p id="track-summary">0曲 / 0:00 / 0 MB</p>
+        </div>
+        <button class="text-button" id="clear-files" type="button" disabled>すべて外す</button>
+      </div>
+      <ol id="track-list" class="track-list" aria-label="読み込み済み音声ファイル">
+        <li class="empty-state">まだ音声ファイルはありません。</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="counter-step" id="flavor-section" aria-labelledby="flavor-title">
+    <div class="step-heading">
+      <span class="step-number">02</span>
+      <div>
+        <p class="step-kicker">Choose the finish</p>
+        <h2 id="flavor-title">味を決める</h2>
+      </div>
+    </div>
+
+    <div class="finish-types" id="finish-types" role="radiogroup" aria-label="仕上げタイプ">
+      <button type="button" class="finish-type" role="radio" aria-checked="false" data-finish-type="natural">
+        <strong>そのまま整える</strong><span>素材尊重</span>
+      </button>
+      <button type="button" class="finish-type selected" role="radio" aria-checked="true" data-finish-type="streaming">
+        <strong>配信バランス</strong><span>標準</span>
+      </button>
+      <button type="button" class="finish-type" role="radio" aria-checked="false" data-finish-type="loud">
+        <strong>音圧寄り</strong><span>勢いを足す</span>
+      </button>
+      <button type="button" class="finish-type" role="radio" aria-checked="false" data-finish-type="vocal">
+        <strong>歌を前へ</strong><span>声中心</span>
+      </button>
+      <button type="button" class="finish-type" role="radio" aria-checked="false" data-finish-type="bgm">
+        <strong>やわらかBGM</strong><span>長く聴ける</span>
+      </button>
+    </div>
+
+    <div class="auto-finish">
+      <div>
+        <h3>おまかせ仕上げ</h3>
+        <p>アルバムの状態を見て、選んだ目標のまま味付けを微調整します。</p>
+      </div>
+      <button class="counter-button accent" id="auto-finish" type="button" disabled>おまかせで整える</button>
+    </div>
+    <div id="auto-feedback" class="notice success" hidden></div>
+
+    <details class="advanced-settings" id="advanced-settings">
+      <summary>詳しく調整する <span id="custom-label">配信バランス</span></summary>
+      <div class="slider-grid">
+        <label class="control-row" for="target-loudness">
+          <span><strong>アルバムの目標音量</strong><small>全曲へ同じ持ち上げ量を使います</small></span>
+          <input id="target-loudness" type="range" min="-24" max="-8" step="0.5" value="-14">
+          <output for="target-loudness" data-unit=" 参考LUFS">-14 参考LUFS</output>
+        </label>
+        <label class="control-row" for="low-cleanup">
+          <span><strong>低域の整理</strong><small>下の濁りをほどく</small></span>
+          <input id="low-cleanup" type="range" min="0" max="100" value="40">
+          <output for="low-cleanup">40</output>
+        </label>
+        <label class="control-row" for="clarity">
+          <span><strong>明瞭感</strong><small>輪郭を見えやすくする</small></span>
+          <input id="clarity" type="range" min="0" max="100" value="55">
+          <output for="clarity">55</output>
+        </label>
+        <label class="control-row" for="deharsh">
+          <span><strong>刺さりの抑え</strong><small>高い刺激をやわらげる</small></span>
+          <input id="deharsh" type="range" min="0" max="100" value="60">
+          <output for="deharsh">60</output>
+        </label>
+        <label class="control-row" for="punch">
+          <span><strong>弾き出し</strong><small>音の立ち上がりを前へ</small></span>
+          <input id="punch" type="range" min="0" max="100" value="50">
+          <output for="punch">50</output>
+        </label>
+        <label class="control-row" for="stereo-width">
+          <span><strong>ステレオ感</strong><small>50が原音の広さ</small></span>
+          <input id="stereo-width" type="range" min="0" max="100" value="55">
+          <output for="stereo-width">55</output>
+        </label>
+        <label class="toggle-row" for="peak-safe">
+          <span><strong>ピークセーフ</strong><small>危険な飛び出しだけを保護</small></span>
+          <input id="peak-safe" type="checkbox" checked>
+        </label>
+      </div>
+    </details>
+  </section>
+
+  <section class="counter-step" id="preview-section" aria-labelledby="preview-title">
+    <div class="step-heading">
+      <span class="step-number">03</span>
+      <div>
+        <p class="step-kicker">Taste the result</p>
+        <h2 id="preview-title">試食する</h2>
+      </div>
+    </div>
+
+    <div class="preview-toolbar">
+      <label for="preview-track">試食する曲</label>
+      <select id="preview-track" disabled>
+        <option>曲を読み込んでください</option>
+      </select>
+      <button class="counter-button secondary" id="prepare-preview" type="button" disabled>試食を仕込む</button>
+    </div>
+
+    <div class="waveform-wrap">
+      <canvas id="waveform" height="200" aria-label="選択曲の波形"></canvas>
+      <span id="play-time">0:00 / 0:00</span>
+    </div>
+
+    <div class="preview-controls">
+      <button class="counter-button secondary" id="play-original" type="button" disabled>▶ 原音</button>
+      <button class="counter-button secondary" id="play-finished" type="button" disabled>▶ 仕上げ後</button>
+      <label class="compact-toggle" for="level-match">
+        <input id="level-match" type="checkbox" checked>
+        音量感を揃えて比較
+      </label>
+    </div>
+
+    <div class="meter-grid" aria-label="音声メーター">
+      <div><span>Peak</span><strong id="meter-peak">—</strong></div>
+      <div><span>RMS</span><strong id="meter-rms">—</strong></div>
+      <div><span>Crest</span><strong id="meter-crest">—</strong></div>
+      <div title="規格準拠測定ではなく、アルバム内の比較と共通ゲイン算出に使う参考値です。">
+        <span>参考LUFS</span><strong id="meter-lufs">—</strong>
+      </div>
+      <div><span>Peak Safe</span><strong id="meter-reduction">—</strong></div>
+    </div>
+  </section>
+
+  <section class="counter-step" id="render-section" aria-labelledby="render-title">
+    <div class="step-heading">
+      <span class="step-number">04</span>
+      <div>
+        <p class="step-kicker">Finish the album</p>
+        <h2 id="render-title">仕上げる</h2>
+      </div>
+    </div>
+
+    <div class="render-card">
+      <div class="render-actions">
+        <button class="counter-button primary" id="render-all" type="button" disabled>全曲を仕上げる</button>
+        <button class="counter-button danger" id="cancel-render" type="button" hidden>中止する</button>
+      </div>
+      <p id="render-message">音声ファイルを読み込むと仕上げを開始できます。</p>
+      <div class="progress-group">
+        <label for="album-progress">アルバム進捗 <span id="album-progress-text">0 / 0曲</span></label>
+        <progress id="album-progress" max="1" value="0"></progress>
+        <label for="track-progress">曲内進捗 <span id="track-progress-text">待機中</span></label>
+        <progress id="track-progress" max="1" value="0"></progress>
+      </div>
+      <div id="download-area" class="download-area" hidden></div>
+    </div>
+  </section>
+
+  <aside class="privacy-note">
+    <span aria-hidden="true">🔒</span>
+    <div>
+      <h2>音声は厨房の外へ出ません</h2>
+      <p>読み込んだ音声ファイルは、ご利用のブラウザ内だけで処理されます。音声データをサーバへ送信しません。</p>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="mark">🏮</span>みんと食堂</div>
+    <div class="footer-links">
+      <a href="../">トップ</a>
+      <a href="../popcornpop/">PopcornPop</a>
+      <a href="../hotelcurryspice/">HotelCurrySpice</a>
+      <a href="../about/">お品書き</a>
+    </div>
+    <div class="footer-meta">&copy; Minto Tsukino &middot; MMXXVI</div>
+  </div>
+</footer>
+
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
