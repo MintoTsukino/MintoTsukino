@@ -13,6 +13,7 @@ export const appState = {
     active: false,
     cancelled: false,
     results: [],
+    individualMode: false,
   },
 };
 

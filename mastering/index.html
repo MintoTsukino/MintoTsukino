@@ -130,7 +130,7 @@
       </div>
       <button class="counter-button accent" id="auto-finish" type="button" disabled>おまかせで整える</button>
     </div>
-    <div id="auto-feedback" class="notice success" hidden></div>
+    <div id="auto-feedback" class="notice success" role="status" aria-live="polite" hidden></div>
 
     <details class="advanced-settings" id="advanced-settings">
       <summary>詳しく調整する <span id="custom-label">配信バランス</span></summary>
@@ -191,7 +191,7 @@
     </div>
 
     <div class="waveform-wrap">
-      <canvas id="waveform" height="200" aria-label="選択曲の波形"></canvas>
+      <canvas id="waveform" height="200" aria-label="原音と仕上げ後の波形。灰色が原音、緑が仕上げ後です。"></canvas>
       <span id="play-time">0:00 / 0:00</span>
     </div>
 

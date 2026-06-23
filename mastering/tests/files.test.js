@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  collectDroppedFiles,
   naturalCompare,
   outputPathForTrack,
   resolveOutputPaths,
@@ -34,4 +35,34 @@ test("output paths preserve folders and resolve collisions", () => {
     "Disc 1/song_mastered_2.wav",
     "Disc 2/song_mastered.wav",
   ]);
+});
+
+test("folder drop walks nested entries and keeps the relative path", async () => {
+  const audioFile = { name: "track01.wav" };
+  const fileEntry = {
+    isFile: true,
+    isDirectory: false,
+    file(callback) {
+      callback(audioFile);
+    },
+  };
+  let returned = false;
+  const directoryEntry = {
+    name: "Album",
+    isFile: false,
+    isDirectory: true,
+    createReader() {
+      return {
+        readEntries(callback) {
+          callback(returned ? [] : [fileEntry]);
+          returned = true;
+        },
+      };
+    },
+  };
+  const files = await collectDroppedFiles({
+    items: [{ webkitGetAsEntry: () => directoryEntry }],
+  });
+  assert.equal(files.length, 1);
+  assert.equal(files[0].relativePath, "Album/track01.wav");
 });

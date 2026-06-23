@@ -36,6 +36,27 @@ self.addEventListener("message", (event) => {
       return;
     }
 
+    if (action === "preview") {
+      const result = processAudio(
+        channels,
+        sampleRate,
+        settings,
+        sharedGainDb,
+        (progress) => self.postMessage({ id, type: "progress", progress }),
+      );
+      const transfer = result.channels.map((channel) => channel.buffer);
+      self.postMessage({
+        id,
+        type: "result",
+        channels: result.channels,
+        sampleRate: result.sampleRate,
+        analysis: result.analysis,
+        maxReductionDb: result.maxReductionDb,
+        deharshReductionDb: result.deharshReductionDb,
+      }, transfer);
+      return;
+    }
+
     throw new Error(`未対応の処理です: ${action}`);
   } catch (error) {
     self.postMessage({

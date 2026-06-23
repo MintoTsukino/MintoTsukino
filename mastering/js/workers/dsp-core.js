@@ -1,6 +1,9 @@
 import { analyzeAudio, dbToGain, resampleChannels } from "./analysis.js";
 import { applyBiquad } from "./biquad.js";
+import { applyDeharsh } from "./deharsh.js";
 import { applyPeakLimiter } from "./limiter.js";
+import { applyStereoWidth } from "./stereo.js";
+import { applyTransientPunch } from "./transient.js";
 
 function amountCurve(value) {
   const normalized = Math.max(0, Math.min(1, value / 100));
@@ -30,13 +33,23 @@ export function processAudio(channels, sourceRate, settings, sharedGainDb, onPro
   if (clarityAmount > 0) {
     output = output.map((channel) => applyBiquad(channel, "peaking", sampleRate, 3_000, 0.75, 2 * clarityAmount));
   }
+  onProgress(0.45);
+
+  const deharsh = applyDeharsh(output, sampleRate, settings.deharsh ?? 0);
+  output = deharsh.channels;
   onProgress(0.58);
+
+  output = applyTransientPunch(output, sampleRate, settings.punch ?? 0);
+  onProgress(0.68);
+
+  output = applyStereoWidth(output, sampleRate, settings.stereoWidth ?? 50);
+  onProgress(0.76);
 
   const sharedGain = dbToGain(sharedGainDb);
   for (const channel of output) {
     for (let i = 0; i < channel.length; i += 1) channel[i] *= sharedGain;
   }
-  onProgress(0.76);
+  onProgress(0.86);
 
   let maxReductionDb = 0;
   if (settings.peakSafe !== false) {
@@ -50,6 +63,7 @@ export function processAudio(channels, sourceRate, settings, sharedGainDb, onPro
     channels: output,
     sampleRate,
     maxReductionDb,
+    deharshReductionDb: deharsh.maxReductionDb,
     analysis: analyzeAudio(output, sampleRate),
   };
 }

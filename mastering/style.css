@@ -72,6 +72,11 @@
   color: #f5aa91;
 }
 
+.app-status[data-state="warning"] {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
 .counter-step {
   background: rgba(31, 26, 23, 0.9);
   border: 1px solid var(--line);
@@ -197,6 +202,12 @@
 .counter-button.danger {
   border-color: var(--vermilion-soft);
   color: #ffb6a3;
+}
+
+.counter-button.playing {
+  border-color: var(--mint);
+  color: var(--mint-soft);
+  background: rgba(127, 223, 202, 0.1);
 }
 
 .text-button {
@@ -528,11 +539,35 @@
 }
 
 .download-area {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   margin-top: 20px;
   padding: 18px;
   border: 1px solid var(--mint);
   border-radius: 10px;
   background: rgba(127, 223, 202, 0.06);
+}
+
+.download-area[hidden] {
+  display: none;
+}
+
+.download-area > strong,
+.download-area > p {
+  flex-basis: 100%;
+}
+
+.download-area > p {
+  margin: 0 0 4px;
+  opacity: 0.72;
+}
+
+.download-button {
+  display: inline-block;
+  text-decoration: none;
 }
 
 .privacy-note {
