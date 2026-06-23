@@ -8,7 +8,7 @@
 
 | 名前 | 種別 | 状態 |
 |---|---|---|
-| 🍴 **マスタリングカウンター** | Browser Mastering Tool | Gate 0〜2実装済み（実音確認待ち） |
+| 🍴 **マスタリングカウンター** | Browser Mastering Tool | Gate 0〜2実装済み（公開候補） |
 | 🍿 **PopcornPop** | 粒立ちエンハンサー | v0.5.0（Windows x64 VST3） |
 | 🍛 **HotelCurrySpice** | Harmonic Spice | v0.8.0（Windows x64 VST3） |
 | 🍜 RamenWobble 他 | — | 準備中 |
@@ -24,7 +24,7 @@
 
 ## ライセンス
 
-サイト内容と各プラグインの利用条件は、ダウンロード zip 同梱の `LICENSE.txt` を参照してください。
+サイト内容、ブラウザ道具、各プラグインの利用条件は、該当ページまたはダウンロード zip 同梱の `LICENSE.txt` を参照してください。
 
 ---
 

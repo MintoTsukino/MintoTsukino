@@ -31,4 +31,4 @@ npm test
 - Peak Safeはサンプルピーク基準で、検証済みTrue Peakではない。
 - 読み込み可能な圧縮形式はブラウザのデコーダーに依存する。
 - 大容量処理は端末メモリに依存する。
-- Edge／Firefox／Safariの実機QAと実曲での聴感確認はリリース前に行う。
+- Edge／Firefox／Safariなど、実際に使うブラウザでの追加QAは必要に応じて行う。
