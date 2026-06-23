@@ -56,7 +56,7 @@
 
   <section class="screenshot">
     <div class="screenshot-frame">
-      <img src="../assets/img/popcornpop-gui.png" alt="PopcornPop プラグインGUI - 5プリセット、POPマクロ、I/Oメーター、ポップコーンアニメ" loading="lazy">
+      <img src="../assets/img/popcornpop-gui.png" alt="PopcornPop プラグイン画面 - 5プリセット、POPマクロ、音量メーター、ポップコーンアニメ" loading="lazy">
     </div>
     <p class="screenshot-caption">PopcornPop GUI &middot; Running in FL Studio</p>
   </section>
@@ -81,7 +81,7 @@
       <div class="feature">
         <span class="feature-icon">⚡</span>
         <h3>トランジェント強調</h3>
-        <p>Fast / Slow Envelope差分でアタックを引き立てる、上限付きアップ・ダウン両方向コンプ。</p>
+        <p>音の立ち上がりをほどよく前に出して、弾ける感じを加える。</p>
       </div>
       <div class="feature">
         <span class="feature-icon">🎛️</span>
@@ -90,8 +90,8 @@
       </div>
       <div class="feature">
         <span class="feature-icon">📊</span>
-        <h3>I/Oメーター</h3>
-        <p>入出力ピークメーター付き。BYPASSはOUTPUTを含む全処理を完全に迂回。</p>
+        <h3>音量メーター</h3>
+        <p>入り口と出口の音量を見ながら、かけ具合を調整できる。</p>
       </div>
       <div class="feature">
         <span class="feature-icon">🎬</span>
@@ -163,10 +163,10 @@
       <ul>
         <li><code>POP</code> ── 粒立ち・密度・輪郭をまとめて調整するメインつまみ</li>
         <li><code>OUTPUT</code> ── 最終出力音量（dB）</li>
-        <li><code>BYPASS</code> ── 全処理を迂回（OUTPUTも含む完全パススルー）</li>
+        <li><code>BYPASS</code> ── 効果を一時的にオフ</li>
       </ul>
       <p style="font-size: 13px; opacity: 0.75; margin-top: 14px; line-height: 1.85;">
-        POP 0% かつ OUTPUT 0 dB では、入力をビット完全に通します。<br>
+        POP 0% かつ OUTPUT 0 dB では、入力音をそのまま通します。<br>
         プリセット選択時は推奨POP値もセットされますが、その後POPは自由に動かしてOK。
       </p>
     </div>
@@ -174,7 +174,7 @@
     <div class="spec-block">
       <h3>使用上のメモ</h3>
       <ul>
-        <li>大きく効かせてもピークが暴れにくい安全設計です。</li>
+        <li>大きく効かせても音量が暴れにくい安全設計です。</li>
         <li>強く掛ける際は OUTPUT で音量を揃え、BYPASS と比較してください。</li>
         <li>無音や極小音を過剰に持ち上げない安全境界を内蔵しています。</li>
       </ul>
