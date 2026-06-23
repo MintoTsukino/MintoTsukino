@@ -1,6 +1,6 @@
-# 🏮 みんと食堂 / Minto Tsukino VST Plugins
+# 🏮 みんと食堂 / Minto Tsukino Audio Tools
 
-月ノみんと（Minto Tsukino）によるVSTプラグインシリーズ「**みんと食堂**」のポータルサイトです。
+月ノみんと（Minto Tsukino）による音づくりツールシリーズ「**みんと食堂**」のポータルサイトです。
 
 → **公開サイト**: https://mintotsukino.github.io/MintoTsukino/
 

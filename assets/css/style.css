@@ -269,6 +269,68 @@ main {
   margin-bottom: 80px;
 }
 
+.browser-tools {
+  margin-bottom: 56px;
+}
+
+.menu-card.browser-tool-card {
+  min-height: 180px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 32px;
+  padding: 34px 40px;
+  border-color: rgba(127, 223, 202, 0.32);
+  background:
+    linear-gradient(120deg, rgba(127, 223, 202, 0.08), transparent 46%),
+    var(--ink-2);
+}
+
+.menu-card.browser-tool-card::before {
+  opacity: 1;
+}
+
+.browser-tool-main {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  min-width: 0;
+}
+
+.browser-tool-card .menu-icon {
+  margin-bottom: 0;
+  font-size: 64px;
+}
+
+.browser-tool-copy {
+  min-width: 0;
+}
+
+.browser-tool-card .menu-name {
+  font-size: clamp(24px, 4vw, 32px);
+}
+
+.browser-tool-card .menu-desc {
+  max-width: 650px;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.browser-tool-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.tool-open {
+  color: var(--gold);
+  font-family: var(--font-jp-serif);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .menu-card {
   background: var(--ink-2);
   border: 1px solid var(--line);
@@ -846,6 +908,31 @@ footer {
 
   .section-head h2 {
     font-size: 22px;
+  }
+
+  .browser-tools {
+    margin-bottom: 48px;
+  }
+
+  .menu-card.browser-tool-card {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 28px 24px;
+  }
+
+  .browser-tool-main {
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .browser-tool-card .menu-icon {
+    font-size: 48px;
+  }
+
+  .browser-tool-action {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .preset-row {
