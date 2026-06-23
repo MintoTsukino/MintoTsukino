@@ -42,6 +42,7 @@ const elements = {
   playTime: document.querySelector("#play-time"),
   playOriginal: document.querySelector("#play-original"),
   playFinished: document.querySelector("#play-finished"),
+  stopPreview: document.querySelector("#stop-preview"),
   levelMatch: document.querySelector("#level-match"),
   meterPeak: document.querySelector("#meter-peak"),
   meterRms: document.querySelector("#meter-rms"),
@@ -131,6 +132,7 @@ function updatePlayTime(current, duration, kind) {
   elements.playTime.textContent = `${formatDuration(current)} / ${formatDuration(duration)}`;
   elements.playOriginal.classList.toggle("playing", kind === "original");
   elements.playFinished.classList.toggle("playing", kind === "finished");
+  if (elements.stopPreview) elements.stopPreview.disabled = !kind;
 }
 
 const previewController = createPreviewController(ensureAudioContext, updatePlayTime);
@@ -771,6 +773,9 @@ elements.playOriginal.addEventListener("click", () => {
 });
 elements.playFinished.addEventListener("click", () => {
   previewController.play("finished", elements.levelMatch.checked);
+});
+elements.stopPreview.addEventListener("click", () => {
+  previewController.stop();
 });
 elements.renderAll.addEventListener("click", renderAllTracks);
 elements.cancelRender.addEventListener("click", cancelRender);
