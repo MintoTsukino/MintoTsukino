@@ -9,7 +9,7 @@
 | 名前 | 種別 | 状態 |
 |---|---|---|
 | 🍿 **PopcornPop** | 粒立ちエンハンサー | v0.5.0（Windows x64 VST3） |
-| 🍛 HotelCurrySpice | Saturation / Distortion | 仕込み中 |
+| 🍛 **HotelCurrySpice** | Harmonic Spice | v0.8.0（Windows x64 VST3） |
 | 🍜 RamenWobble 他 | — | 準備中 |
 
 ## ダウンロード
