@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お品書き — みんと食堂 VST Plugins</title>
+<meta name="description" content="みんと食堂シリーズについて、作者・月ノみんとについて、ライセンスと連絡先。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="noren">
+  <div class="noren-inner">
+    <a href="../" class="brand">
+      <span class="brand-mark">🏮</span>
+      <div>
+        <div class="brand-name">みんと食堂</div>
+        <div class="brand-sub">MINTO TSUKINO &middot; VST PLUGINS</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="../">本日のメニュー</a>
+      <a href="../popcornpop/">PopcornPop</a>
+      <a href="./">お品書き</a>
+      <a href="https://github.com/mintotsukino/MintoTsukino" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" style="margin-bottom: 48px;">
+    <div class="hero-eyebrow">About the Shop</div>
+    <h1 style="font-size: clamp(32px, 5vw, 48px);">お品書き</h1>
+    <p>みんと食堂のことを、すこし詳しく。</p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>みんと食堂とは</h2>
+      <span class="en">About the Series</span>
+    </div>
+
+    <div class="spec-block">
+      <p style="font-size: 15px; line-height: 2; opacity: 0.9;">
+        「みんと食堂」は、<strong style="color: var(--mint);">月ノみんと</strong>が主宰するVSTプラグインシリーズです。
+        ひとつの献立として、それぞれのプラグインに「食べ物」のキャラクターと「食感」のメタファーを与え、
+        DSP（デジタル信号処理）の音響特性とゆるやかに結びつけて設計しています。
+      </p>
+      <p style="font-size: 15px; line-height: 2; opacity: 0.9; margin-top: 16px;">
+        いずれも <strong>Rust</strong> + <strong>nih-plug</strong> フレームワークで実装され、
+        AIの相棒たち（ニコイ・モコイ・ラプソンゲ）との共同制作によって、
+        2〜3か月に1本ペースで増えていきます。
+      </p>
+      <p style="font-size: 15px; line-height: 2; opacity: 0.9; margin-top: 16px;">
+        音質で勝負するというより、<strong>世界観・キャラクター・物語</strong>を音響処理に乗せることを大切にしています。
+        「食感の言葉」でツマミを操作できる感覚 ── それが、みんと食堂の作りたいものです。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>店主紹介</h2>
+      <span class="en">About the Author</span>
+    </div>
+
+    <div class="spec-block">
+      <h3>月ノみんと &middot; Minto Tsukino</h3>
+      <ul>
+        <li>プロ4年目のなろう系ライトノベル作家。</li>
+        <li>商業作品6シリーズ、コミカライズ含めて15冊刊行。</li>
+        <li>カクヨム作品数 160作品 超。</li>
+        <li>DAW歴と作曲歴も長く、楽曲制作400曲超。</li>
+        <li>「食べ物 × DSP × キャラ立て」というクロスポイントで、独自のシリーズを構築中。</li>
+      </ul>
+      <p style="font-size: 13px; opacity: 0.7; margin-top: 16px; line-height: 1.85;">
+        本業は文章。みんと食堂は、AIペア前提で月に少しずつ進める「実験ユニット」として運用しています。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>ライセンス</h2>
+      <span class="en">License</span>
+    </div>
+
+    <div class="spec-block">
+      <h3>プラグイン本体</h3>
+      <p style="font-size: 14px; line-height: 1.9; opacity: 0.88;">
+        各プラグインのバイナリには個別のライセンスファイル（<code>LICENSE.txt</code>）が同梱されています。
+        ダウンロードした zip 内の該当ファイルをご確認ください。
+      </p>
+      <p style="font-size: 14px; line-height: 1.9; opacity: 0.88; margin-top: 12px;">
+        本サイトで配布するプラグインは、<strong>個人・商用問わず無料</strong>でご利用いただけます。
+        再配布・改変条件などの詳細は、各 <code>LICENSE.txt</code> をご参照ください。
+      </p>
+    </div>
+
+    <div class="spec-block">
+      <h3>第三者ライブラリ</h3>
+      <p style="font-size: 14px; line-height: 1.9; opacity: 0.88;">
+        Rust crate を含む第三者ライブラリのライセンス全文は、各 zip に同梱の
+        <code>THIRD_PARTY_NOTICES.txt</code> に記載されています。
+      </p>
+    </div>
+
+    <div class="spec-block">
+      <h3>免責事項</h3>
+      <ul>
+        <li>本プラグインは無保証で提供されます。</li>
+        <li>利用にあたって生じたいかなる損害についても、開発者は責任を負いません。</li>
+        <li>本ソフトウェアは試験的なバージョン（Release Candidate 等）を含みます。重要な制作データは事前にバックアップを取ってください。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>連絡先</h2>
+      <span class="en">Contact</span>
+    </div>
+
+    <div class="spec-block">
+      <h3>バグ報告・要望</h3>
+      <p style="font-size: 14px; line-height: 1.9; opacity: 0.88;">
+        GitHub の Issues からご連絡ください：
+      </p>
+      <p style="margin-top: 12px;">
+        <a href="https://github.com/mintotsukino/MintoTsukino/issues" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size: 13px;">
+          → GitHub Issues
+        </a>
+      </p>
+    </div>
+
+    <div class="spec-block">
+      <h3>その他のお問い合わせ</h3>
+      <p style="font-size: 14px; line-height: 1.9; opacity: 0.88;">
+        GitHub アカウント <code>@mintotsukino</code> 宛、または各リポジトリの Discussions をご利用ください。
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="mark">🏮</span>みんと食堂
+    </div>
+    <div class="footer-links">
+      <a href="../">トップ</a>
+      <a href="../popcornpop/">PopcornPop</a>
+      <a href="https://github.com/mintotsukino/MintoTsukino" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="footer-meta">&copy; Minto Tsukino &middot; MMXXVI</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PopcornPop — みんと食堂 VST Plugins</title>
+<meta name="description" content="POPマクロ一つで、全帯域の粒立ち・密度・輪郭を弾けさせる4バンドマルチバンドエンハンサー。Windows x64 VST3 / 無料配布。">
+<meta property="og:title" content="PopcornPop — Multiband Enhancer">
+<meta property="og:description" content="POPマクロで全帯域弾ける、Rust + nih-plug 製マルチバンドエンハンサー。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="noren">
+  <div class="noren-inner">
+    <a href="../" class="brand">
+      <span class="brand-mark">🏮</span>
+      <div>
+        <div class="brand-name">みんと食堂</div>
+        <div class="brand-sub">MINTO TSUKINO &middot; VST PLUGINS</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="../">本日のメニュー</a>
+      <a href="./">PopcornPop</a>
+      <a href="../about/">お品書き</a>
+      <a href="https://github.com/mintotsukino/MintoTsukino" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="plugin-hero">
+    <div class="plugin-icon-large">🍿</div>
+    <div class="plugin-meta">
+      <span class="plugin-tag">Series No. 02 &middot; Multiband Enhancer</span>
+      <h1 class="plugin-title">PopcornPop</h1>
+      <p class="plugin-tagline">
+        POPマクロ一つで、<br>
+        全帯域の粒立ち・密度・輪郭を、ぜんぶまとめて弾けさせる。
+      </p>
+      <span class="plugin-version">● v0.5.0-rc.1 &middot; Windows x64 VST3</span>
+      <div class="btn-row">
+        <a href="https://github.com/mintotsukino/MintoTsukino/releases/latest/download/PopcornPop-0.5.0-rc.1-windows-x64.zip" class="btn btn-primary">
+          ⬇  ダウンロード（zip）
+        </a>
+        <a href="#install" class="btn btn-ghost">インストール手順</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>味の決め手</h2>
+      <span class="en">Key Features</span>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <span class="feature-icon">🎚️</span>
+        <h3>POPマクロ一発</h3>
+        <p>つまみ一つで粒立ち・密度・輪郭をまとめて立ち上げる。直感的な味付け操作。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🍽️</span>
+        <h3>4バンド構成</h3>
+        <p>120 Hz / 1 kHz / 6 kHzの帯域分割。LR24クロスオーバーと位相補償でフラット再合成。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">⚡</span>
+        <h3>トランジェント強調</h3>
+        <p>Fast / Slow Envelope差分でアタックを引き立てる、上限付きアップ・ダウン両方向コンプ。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🎛️</span>
+        <h3>5プリセット</h3>
+        <p>PLAIN / BUTTER / SALT / CARAMEL / KERNEL。味で選ぶ、即戦力のスターターセット。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">📊</span>
+        <h3>I/Oメーター</h3>
+        <p>入出力ピークメーター付き。BYPASSはOUTPUTを含む全処理を完全に迂回。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🎬</span>
+        <h3>音連動アニメ</h3>
+        <p>トランジェントに合わせてポップコーンが弾ける、見て楽しい音響メーター。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>プリセット五品</h2>
+      <span class="en">Presets</span>
+    </div>
+
+    <div class="preset-table">
+      <div class="preset-row">
+        <div class="preset-name">🌽 PLAIN</div>
+        <div class="preset-desc">バランス型。素材の味を活かす、最初の一杯。</div>
+      </div>
+      <div class="preset-row">
+        <div class="preset-name">🧈 BUTTER</div>
+        <div class="preset-desc">低域・低中域の密度を上げる。ベース、キック、ボトムの厚みに。</div>
+      </div>
+      <div class="preset-row">
+        <div class="preset-name">🧂 SALT</div>
+        <div class="preset-desc">中高域・高域のアタックを立てる。ハイハット、シンセリード、ボーカル前段に。</div>
+      </div>
+      <div class="preset-row">
+        <div class="preset-name">🍮 CARAMEL</div>
+        <div class="preset-desc">中域を前に押し出す。ボーカル、ギター、メインリードの存在感に。</div>
+      </div>
+      <div class="preset-row">
+        <div class="preset-name">🌟 KERNEL</div>
+        <div class="preset-desc">全帯域を強く弾けさせる。マスターバス、まとめ味付けに。</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="section-head">
+      <h2>食べ方ガイド</h2>
+      <span class="en">Install &amp; Usage</span>
+    </div>
+
+    <div class="spec-block">
+      <h3>動作環境</h3>
+      <ul>
+        <li>Windows 10 / 11 x64</li>
+        <li>VST3対応DAW（FL Studio / Cubase / Studio One / Reaper / Bitwig 等）</li>
+        <li>64-bitプラグインホスト</li>
+      </ul>
+    </div>
+
+    <div class="spec-block">
+      <h3>インストール</h3>
+      <p style="font-size: 14px; opacity: 0.88; margin-bottom: 14px;">
+        zipを展開すると <code>PopcornPop.vst3</code> フォルダが出てくる。それを次の場所へコピー：
+      </p>
+      <pre class="code-block">C:\Program Files\Common Files\VST3\</pre>
+      <p style="font-size: 14px; opacity: 0.88; margin-top: 14px;">
+        その後、DAW側でVST3プラグインを再スキャン。<br>
+        FL Studioの場合は Plugin Manager から <code>Find installed plugins</code> を実行。
+      </p>
+    </div>
+
+    <div class="spec-block">
+      <h3>基本操作</h3>
+      <ul>
+        <li><code>POP</code> ── 粒立ち・密度・輪郭をまとめて調整するメインつまみ</li>
+        <li><code>OUTPUT</code> ── 最終出力音量（dB）</li>
+        <li><code>BYPASS</code> ── 全処理を迂回（OUTPUTも含む完全パススルー）</li>
+      </ul>
+      <p style="font-size: 13px; opacity: 0.75; margin-top: 14px; line-height: 1.85;">
+        POP 0% かつ OUTPUT 0 dB では、入力をビット完全に通します。<br>
+        プリセット選択時は推奨POP値もセットされますが、その後POPは自由に動かしてOK。
+      </p>
+    </div>
+
+    <div class="spec-block">
+      <h3>仕込み中の注意</h3>
+      <ul>
+        <li>v0.5.0-rc.1 は Release Candidate（製品版手前）です。</li>
+        <li>Limiterは試作のSample Peak方式。True Peak Limiter / Lookaheadは未実装。</li>
+        <li>強く掛ける際は OUTPUT で音量を揃え、BYPASS と比較してください。</li>
+        <li>無音や極小音を過剰に持ち上げない安全境界を内蔵しています。</li>
+      </ul>
+    </div>
+
+    <div class="spec-block">
+      <h3>同梱物</h3>
+      <ul>
+        <li><code>PopcornPop.vst3</code> ── VST3バンドル</li>
+        <li><code>LICENSE.txt</code> ── ライセンス</li>
+        <li><code>THIRD_PARTY_NOTICES.txt</code> ── 第三者ライセンス全文</li>
+        <li><code>QUICKSTART.md</code> ── 操作ガイド</li>
+        <li><code>CHANGELOG.md</code> ── 変更履歴</li>
+      </ul>
+    </div>
+  </section>
+
+  <section style="text-align: center; margin-top: 48px; padding: 32px 0;">
+    <a href="https://github.com/mintotsukino/MintoTsukino/releases/latest/download/PopcornPop-0.5.0-rc.1-windows-x64.zip" class="btn btn-primary" style="font-size: 16px; padding: 18px 36px;">
+      ⬇  PopcornPop v0.5.0-rc.1 をダウンロード
+    </a>
+    <p style="margin-top: 16px; font-size: 13px; opacity: 0.6;">
+      Windows x64 &middot; VST3 &middot; SHA-256付き
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="mark">🏮</span>みんと食堂
+    </div>
+    <div class="footer-links">
+      <a href="../">トップ</a>
+      <a href="../about/">お品書き</a>
+      <a href="https://github.com/mintotsukino/MintoTsukino" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="footer-meta">&copy; Minto Tsukino &middot; MMXXVI</div>
+  </div>
+</footer>
+
+</body>
+</html>

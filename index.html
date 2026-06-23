@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>みんと食堂 — Minto Tsukino VST Plugins</title>
+<meta name="description" content="月ノみんとが作るVSTプラグインシリーズ「みんと食堂」。食べ物の食感とDSPの音響特性を結ぶ、Rust + nih-plug製の音響プラグイン群。">
+<meta property="og:title" content="みんと食堂 — Minto Tsukino VST Plugins">
+<meta property="og:description" content="食べ物の食感×DSP×キャラ立て。Rust + nih-plug製、日本発のVSTシリーズ。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="noren">
+  <div class="noren-inner">
+    <a href="./" class="brand">
+      <span class="brand-mark">🏮</span>
+      <div>
+        <div class="brand-name">みんと食堂</div>
+        <div class="brand-sub">MINTO TSUKINO &middot; VST PLUGINS</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="./">本日のメニュー</a>
+      <a href="popcornpop/">PopcornPop</a>
+      <a href="about/">お品書き</a>
+      <a href="https://github.com/mintotsukino/MintoTsukino" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Welcome to Minto Shokudo</div>
+    <h1>食べる音、<br><span class="accent">弾ける音。</span></h1>
+    <p>
+      「食べ物の食感」を「DSPの音響特性」へ翻訳する、<br>
+      Rust + nih-plug 製の VST プラグインシリーズ。<br>
+      みんと食堂、本日も営業中。
+    </p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>本日のおしながき</h2>
+      <span class="en">Today&rsquo;s Menu</span>
+    </div>
+
+    <div class="menu-grid">
+
+      <a href="popcornpop/" class="menu-card">
+        <div class="menu-icon">🍿</div>
+        <div class="menu-name">PopcornPop</div>
+        <div class="menu-en">Multiband Enhancer</div>
+        <div class="menu-desc">POPマクロ一つで、全帯域の粒立ち・密度・輪郭を弾けさせる4バンドエンハンサー。バター、塩、キャラメル、カーネル ── 味で選べる5プリセット。</div>
+        <span class="menu-status">v0.5.0-rc.1 &middot; AVAILABLE</span>
+      </a>
+
+      <div class="menu-card coming-soon" aria-disabled="true">
+        <div class="menu-icon">🍛</div>
+        <div class="menu-name">HotelCurrySpice</div>
+        <div class="menu-en">Saturation / Distortion</div>
+        <div class="menu-desc">ホテルカレーの一刺しの旨味を、サチュレーションで。8段階の表情を持つ鍋キャラとともに、深いコクと辛みを盛る。</div>
+        <span class="menu-status cooking">仕込み中 &middot; COOKING</span>
+      </div>
+
+      <div class="menu-card coming-soon" aria-disabled="true">
+        <div class="menu-icon">🍜</div>
+        <div class="menu-name">RamenWobble</div>
+        <div class="menu-en">Modulation / Chorus</div>
+        <div class="menu-desc">麺のうねりを、揺らぎに変える。ふくよかなコーラスとビブラート。</div>
+        <span class="menu-status coming">準備中 &middot; COMING SOON</span>
+      </div>
+
+      <div class="menu-card coming-soon" aria-disabled="true">
+        <div class="menu-icon">🍤</div>
+        <div class="menu-name">TempuraCrush</div>
+        <div class="menu-en">Bit Crusher</div>
+        <div class="menu-desc">衣のサクサクと、ローファイの粗さを重ねるビットクラッシュ。</div>
+        <span class="menu-status coming">準備中 &middot; COMING SOON</span>
+      </div>
+
+      <div class="menu-card coming-soon" aria-disabled="true">
+        <div class="menu-icon">🍰</div>
+        <div class="menu-name">ChocolateBus</div>
+        <div class="menu-en">Bus Compressor</div>
+        <div class="menu-desc">ガナッシュの粘りで、バスをしっとりまとめる。</div>
+        <span class="menu-status coming">準備中 &middot; COMING SOON</span>
+      </div>
+
+      <div class="menu-card coming-soon" aria-disabled="true">
+        <div class="menu-icon">🍣</div>
+        <div class="menu-name">SashimiCutter</div>
+        <div class="menu-en">Hard Gate</div>
+        <div class="menu-desc">刺身の切り口の鋭さで、不要な気配をスパッと落とすゲート。</div>
+        <span class="menu-status coming">準備中 &middot; COMING SOON</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="philosophy">
+    <h2>みんと食堂、はじめのおしらせ</h2>
+    <p>
+      食べ物には食感があります。<br>
+      音にも食感があります。
+    </p>
+    <p>
+      パリッ、サクッ、しっとり、プルン、カラッ。<br>
+      その手触りをそのままツマミに翻訳して、DAWの卓上にお出しするのが、みんと食堂の仕事です。
+    </p>
+    <p>
+      作家・月ノみんとが、AIの相棒たち（ニコイ・モコイ・ラプソンゲ）と一緒に、<br>
+      Rust + nih-plug でひとつずつ手作りしています。<br>
+      味の好みに合わせて、ゆっくりお選びください。
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="mark">🏮</span>みんと食堂
+    </div>
+    <div class="footer-links">
+      <a href="popcornpop/">PopcornPop</a>
+      <a href="about/">お品書き</a>
+      <a href="https://github.com/mintotsukino/MintoTsukino" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="footer-meta">&copy; Minto Tsukino &middot; MMXXVI</div>
+  </div>
+</footer>
+
+</body>
+</html>
