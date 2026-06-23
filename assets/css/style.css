@@ -533,6 +533,53 @@ main {
   transform: translateY(-2px);
 }
 
+/* ============ スクリーンショット ============ */
+
+.screenshot {
+  margin: 0 auto 72px;
+  text-align: center;
+  max-width: 880px;
+}
+
+.screenshot-frame {
+  position: relative;
+  display: inline-block;
+  padding: 18px;
+  background: linear-gradient(135deg, var(--ink-2), var(--ink-3));
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lift);
+}
+
+.screenshot-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--vermilion), transparent 40%, var(--mint));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.screenshot-caption {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  margin-top: 16px;
+  font-family: var(--font-en);
+}
+
 /* ============ 特徴グリッド ============ */
 
 .features {
