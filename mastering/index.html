@@ -74,6 +74,7 @@
       <div class="button-row">
         <button class="counter-button secondary" id="choose-files" type="button">ファイルを選ぶ</button>
         <button class="counter-button secondary" id="choose-folder" type="button">フォルダを選ぶ</button>
+        <button class="text-button" id="add-demo" type="button">試作用サンプルを入れる</button>
       </div>
       <input id="file-input" type="file" accept="audio/*,.wav,.mp3,.m4a,.aac,.flac,.ogg" multiple hidden>
       <input id="folder-input" type="file" accept="audio/*,.wav,.mp3,.m4a,.aac,.flac,.ogg" webkitdirectory multiple hidden>
@@ -261,6 +262,7 @@
   </div>
 </footer>
 
+<script src="./vendor/jszip.min.js"></script>
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>

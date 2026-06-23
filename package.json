@@ -1,0 +1,8 @@
+{
+  "name": "minto-shokudo-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test mastering/tests/*.test.js"
+  }
+}
