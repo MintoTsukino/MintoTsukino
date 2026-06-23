@@ -8,7 +8,7 @@
 
 | 名前 | 種別 | 状態 |
 |---|---|---|
-| 🍿 **PopcornPop** | Multiband Enhancer | v0.5.0-rc.1（Windows x64 VST3） |
+| 🍿 **PopcornPop** | Multiband Enhancer | v0.5.0（Windows x64 VST3） |
 | 🍛 HotelCurrySpice | Saturation / Distortion | 仕込み中 |
 | 🍜 RamenWobble 他 | — | 準備中 |
 
