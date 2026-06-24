@@ -1,0 +1,604 @@
+/* ============================================
+   みんとの書斎 — 深焦茶＋金の作家部屋
+   ============================================ */
+
+.theme-shosai {
+  --shosai-bg: #15110d;
+  --shosai-bg-2: #1d1813;
+  --shosai-bg-3: #2a2218;
+  --shosai-fg: #f0e6cf;
+  --shosai-fg-soft: rgba(240, 230, 207, 0.74);
+  --shosai-gold: #c9a44e;
+  --shosai-gold-soft: #d8b96b;
+  --shosai-amber: #d4a657;
+  --shosai-rust: #a06848;
+  --shosai-line: rgba(240, 230, 207, 0.1);
+  --shosai-line-strong: rgba(240, 230, 207, 0.24);
+  --shosai-gold-line: rgba(201, 164, 78, 0.32);
+}
+
+body.theme-shosai {
+  background: var(--shosai-bg);
+  color: var(--shosai-fg);
+  font-family: var(--font-jp-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- 書斎の背景（机の木目＋読書灯） ---- */
+
+body.theme-shosai::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(212, 166, 87, 0.1), transparent 50%),
+    radial-gradient(ellipse at 0% 100%, rgba(160, 104, 72, 0.06), transparent 55%),
+    repeating-linear-gradient(90deg,
+      transparent 0,
+      transparent 64px,
+      rgba(240, 230, 207, 0.012) 64px,
+      rgba(240, 230, 207, 0.012) 65px),
+    linear-gradient(180deg, var(--shosai-bg) 0%, var(--shosai-bg-2) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 本のシルエットを薄く後ろに */
+body.theme-shosai::after {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30vh;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent),
+    repeating-linear-gradient(90deg,
+      transparent 0px,
+      transparent 28px,
+      rgba(212, 166, 87, 0.04) 28px,
+      rgba(212, 166, 87, 0.04) 30px,
+      transparent 30px,
+      transparent 56px,
+      rgba(160, 104, 72, 0.04) 56px,
+      rgba(160, 104, 72, 0.04) 58px,
+      transparent 58px,
+      transparent 90px,
+      rgba(240, 230, 207, 0.025) 90px,
+      rgba(240, 230, 207, 0.025) 92px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- ヘッダー（金の細線で区切る書斎扉） ---- */
+
+.shosai-header {
+  position: relative;
+  z-index: 1;
+  padding: 32px 0 0;
+  background: transparent;
+}
+
+.shosai-header::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--shosai-gold-line) 20%,
+    var(--shosai-gold) 50%,
+    var(--shosai-gold-line) 80%,
+    transparent);
+}
+
+.shosai-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 32px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.shosai-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--shosai-fg);
+}
+
+.shosai-brand .mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--shosai-gold-line);
+  background: linear-gradient(135deg, var(--shosai-bg-3), var(--shosai-bg-2));
+  font-size: 18px;
+  box-shadow: inset 0 0 0 1px rgba(201, 164, 78, 0.18);
+}
+
+.shosai-brand .name {
+  font-family: var(--font-jp-serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.shosai-brand .en {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--shosai-gold);
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
+.shosai-nav {
+  display: flex;
+  gap: 24px;
+  font-size: 13px;
+}
+
+.shosai-nav a {
+  color: var(--shosai-fg);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  opacity: 0.78;
+  transition: opacity 0.25s, color 0.25s;
+  padding: 4px 2px;
+  position: relative;
+}
+
+.shosai-nav a:hover {
+  opacity: 1;
+  color: var(--shosai-gold);
+}
+
+/* ---- メイン ---- */
+
+.shosai-main {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 32px 96px;
+}
+
+/* ---- ヒーロー ---- */
+
+.shosai-hero {
+  text-align: left;
+  margin-bottom: 80px;
+  padding: 32px 0;
+  border-left: 2px solid var(--shosai-gold);
+  padding-left: 32px;
+}
+
+.shosai-hero .eyebrow {
+  font-family: var(--font-en);
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  color: var(--shosai-gold);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.shosai-hero h1 {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+
+.shosai-hero h1 .accent {
+  color: var(--shosai-gold);
+}
+
+.shosai-hero p {
+  font-size: 15px;
+  line-height: 2;
+  max-width: 560px;
+  color: var(--shosai-fg-soft);
+  letter-spacing: 0.03em;
+}
+
+/* ---- セクションヘッド ---- */
+
+.shosai-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--shosai-line);
+}
+
+.shosai-section-head h2 {
+  font-family: var(--font-jp-serif);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.shosai-section-head .en {
+  font-family: var(--font-en);
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: var(--shosai-gold);
+  margin-left: auto;
+  text-transform: uppercase;
+}
+
+/* ---- ブロック（プロフィール・解説） ---- */
+
+.shosai-block {
+  background:
+    linear-gradient(180deg, rgba(201, 164, 78, 0.04), transparent 40%),
+    var(--shosai-bg-2);
+  border: 1px solid var(--shosai-line);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.shosai-block h3 {
+  font-family: var(--font-jp-serif);
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  letter-spacing: 0.06em;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--shosai-line);
+  position: relative;
+}
+
+.shosai-block h3::before {
+  content: "❀";
+  color: var(--shosai-gold);
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.shosai-block p {
+  font-size: 14.5px;
+  line-height: 2;
+  color: var(--shosai-fg-soft);
+}
+
+.shosai-block p + p {
+  margin-top: 12px;
+}
+
+.shosai-block ul {
+  list-style: none;
+  padding: 0;
+}
+
+.shosai-block li {
+  padding: 8px 0 8px 22px;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--shosai-fg-soft);
+  border-bottom: 1px dotted var(--shosai-line);
+}
+
+.shosai-block li:last-child {
+  border-bottom: none;
+}
+
+.shosai-block li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--shosai-gold);
+}
+
+.shosai-block code {
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 12px;
+  background: var(--shosai-bg-3);
+  padding: 2px 8px;
+  border-radius: 3px;
+  color: var(--shosai-gold-soft);
+  border: 1px solid var(--shosai-line);
+}
+
+/* ---- 商業作品グリッド（本棚風） ---- */
+
+.shosai-bookshelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 28px;
+  margin-bottom: 56px;
+  padding: 32px 28px 40px;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(201, 164, 78, 0.04) 100%),
+    var(--shosai-bg-2);
+  border: 1px solid var(--shosai-line);
+  border-radius: 6px;
+  position: relative;
+}
+
+.shosai-bookshelf::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--shosai-gold) 30%,
+    var(--shosai-gold) 70%,
+    transparent);
+}
+
+.shosai-book {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--shosai-fg);
+  background: var(--shosai-bg-3);
+  border: 1px solid var(--shosai-line);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1),
+              border-color 0.4s, box-shadow 0.4s;
+  position: relative;
+}
+
+.shosai-book::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--shosai-gold), var(--shosai-rust));
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.shosai-book:hover {
+  transform: translateY(-8px);
+  border-color: var(--shosai-gold-line);
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.5),
+    0 0 32px rgba(201, 164, 78, 0.08);
+}
+
+.shosai-book:hover::after {
+  opacity: 1;
+}
+
+.shosai-book-cover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  background: var(--shosai-bg);
+  border-bottom: 1px solid var(--shosai-line);
+}
+
+.shosai-book-meta {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.shosai-book-tag {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--shosai-gold);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.shosai-book-tag.comic {
+  color: var(--shosai-rust);
+}
+
+.shosai-book-title {
+  font-family: var(--font-jp-serif);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.55;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+.shosai-book-label {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.shosai-book-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--shosai-gold);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ---- オンラインで読める作品 ---- */
+
+.shosai-online {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.shosai-online-card {
+  background: var(--shosai-bg-2);
+  border: 1px solid var(--shosai-line);
+  border-radius: 4px;
+  padding: 22px 24px;
+  text-decoration: none;
+  color: var(--shosai-fg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.3s, transform 0.3s, background 0.3s;
+  position: relative;
+}
+
+.shosai-online-card:hover {
+  border-color: var(--shosai-gold-line);
+  transform: translateY(-3px);
+  background: var(--shosai-bg-3);
+}
+
+.shosai-online-en {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--shosai-gold);
+  text-transform: uppercase;
+}
+
+.shosai-online-name {
+  font-family: var(--font-jp-serif);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.shosai-online-desc {
+  font-size: 12.5px;
+  color: var(--shosai-fg-soft);
+  margin-top: 6px;
+  line-height: 1.8;
+}
+
+/* ---- 開示文 ---- */
+
+.shosai-disclosure {
+  background: var(--shosai-bg-2);
+  border: 1px solid var(--shosai-line);
+  border-radius: 4px;
+  padding: 18px 22px;
+  font-size: 11.5px;
+  color: var(--shosai-fg-soft);
+  line-height: 1.85;
+  margin-top: 16px;
+}
+
+.shosai-disclosure code {
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 11px;
+  background: var(--shosai-bg-3);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--shosai-gold-soft);
+}
+
+/* ---- フッター ---- */
+
+.shosai-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--shosai-line);
+  padding: 32px;
+  background: transparent;
+  margin-top: 48px;
+}
+
+.shosai-footer::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--shosai-gold) 50%,
+    transparent);
+  opacity: 0.4;
+}
+
+.shosai-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.shosai-footer .brand {
+  font-family: var(--font-jp-serif);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--shosai-fg-soft);
+}
+
+.shosai-footer .links {
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+}
+
+.shosai-footer .links a {
+  color: var(--shosai-fg-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.shosai-footer .links a:hover {
+  color: var(--shosai-gold);
+}
+
+.shosai-footer .meta {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: rgba(240, 230, 207, 0.4);
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .shosai-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px 20px 28px;
+  }
+  .shosai-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  .shosai-main {
+    padding: 56px 20px 80px;
+  }
+  .shosai-hero {
+    padding-left: 20px;
+    border-left-width: 1px;
+  }
+  .shosai-block {
+    padding: 24px 20px;
+  }
+  .shosai-bookshelf {
+    padding: 22px 16px 28px;
+    gap: 18px;
+  }
+}

@@ -1,0 +1,571 @@
+/* ============================================
+   みんとのおうち（玄関）— みんとグリーンのポップ明るい入口
+   ============================================ */
+
+:root {
+  color-scheme: light only;
+}
+
+.theme-home {
+  --home-bg: #eef5f0;
+  --home-bg-2: #f6fbf8;
+  --home-bg-card: #ffffff;
+  --home-fg: #1e3026;
+  --home-fg-soft: rgba(30, 48, 38, 0.72);
+  --home-fg-mute: rgba(30, 48, 38, 0.5);
+
+  --home-lime: #b8e986;
+  --home-lime-bright: #cdf28f;
+  --home-mint: #5fdcb9;
+  --home-mint-deep: #2db991;
+  --home-mint-soft: #cdf2e6;
+  --home-mint-bg: #ecfaf3;
+  --home-mint-fizz: #def5ea;
+
+  --home-cream: #fffaec;
+  --home-cream-soft: #fdf5dc;
+  --home-cherry: #ffb3c8;
+  --home-cherry-soft: #ffd5e0;
+  --home-sun: #ffd966;
+  --home-sky: #c5e9fa;
+
+  --home-line: rgba(30, 48, 38, 0.08);
+  --home-line-strong: rgba(30, 48, 38, 0.16);
+
+  --home-shadow-card: 0 6px 18px rgba(45, 185, 145, 0.1);
+  --home-shadow-lift: 0 18px 42px rgba(45, 185, 145, 0.22);
+}
+
+body.theme-home {
+  background: var(--home-bg);
+  color: var(--home-fg);
+  font-family: var(--font-jp-sans);
+  -webkit-font-smoothing: antialiased;
+  color-scheme: light only;
+}
+
+/* ---- ミント主軸の落ち着いたペールトーン背景 ---- */
+
+body.theme-home::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 90% 10%, rgba(95, 220, 185, 0.14), transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(184, 233, 134, 0.08), transparent 55%),
+    linear-gradient(180deg, #eaf3ec 0%, #f3f8f5 50%, #e5f1ea 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- ヘッダー ---- */
+
+.entrance-header {
+  position: relative;
+  z-index: 1;
+  padding: 24px 0 0;
+  background: transparent;
+}
+
+.entrance-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 32px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.entrance-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--home-fg);
+}
+
+.entrance-brand .mark {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--home-lime-bright) 0%, var(--home-mint) 100%);
+  color: #1e3026;
+  font-size: 24px;
+  box-shadow:
+    0 6px 16px rgba(95, 220, 185, 0.42),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.08);
+  transform: rotate(-3deg);
+  transition: transform 0.3s;
+}
+
+.entrance-brand:hover .mark {
+  transform: rotate(2deg) scale(1.05);
+}
+
+.entrance-brand .name {
+  font-family: var(--font-jp-serif);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--home-fg);
+}
+
+.entrance-brand .en {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--home-mint-deep);
+  margin-top: 6px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.entrance-nav {
+  display: flex;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.entrance-nav a {
+  color: var(--home-fg);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-weight: 500;
+  transition: background 0.25s, color 0.25s;
+}
+
+.entrance-nav a:hover {
+  background: var(--home-mint-bg);
+  color: var(--home-mint-deep);
+}
+
+/* ---- メイン ---- */
+
+.entrance-main {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 32px 96px;
+}
+
+/* ---- ヒーロー ---- */
+
+.entrance-hero {
+  text-align: center;
+  margin-bottom: 80px;
+  padding: 24px 16px;
+  position: relative;
+}
+
+.entrance-hero .eyebrow {
+  display: inline-block;
+  font-family: var(--font-en);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--home-mint-deep);
+  margin-bottom: 22px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  background: var(--home-mint-bg);
+  border-radius: 100px;
+  font-weight: 700;
+}
+
+.entrance-hero h1 {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(38px, 7vw, 68px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  margin-bottom: 28px;
+  color: var(--home-fg);
+}
+
+.entrance-hero h1 .accent {
+  display: inline-block;
+  background: linear-gradient(120deg, var(--home-mint-deep) 0%, var(--home-mint) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.entrance-hero h1 .accent::after {
+  content: "🌿";
+  position: absolute;
+  top: -10px;
+  right: -36px;
+  font-size: 28px;
+  -webkit-text-fill-color: initial;
+  transform: rotate(20deg);
+  filter: drop-shadow(0 2px 6px rgba(63, 207, 168, 0.5));
+}
+
+.entrance-hero p {
+  font-size: 15.5px;
+  line-height: 2.1;
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--home-fg-soft);
+  letter-spacing: 0.02em;
+}
+
+/* ---- セクションヘッド ---- */
+
+.entrance-section-head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.entrance-section-head .en {
+  display: inline-block;
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: #fff;
+  background: var(--home-mint-deep);
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.entrance-section-head h2 {
+  font-family: var(--font-jp-serif);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--home-fg);
+}
+
+/* ---- 部屋カード ---- */
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+  margin-bottom: 96px;
+}
+
+.room-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: var(--home-fg);
+  background: var(--home-bg-card);
+  border: 1px solid var(--home-line);
+  border-radius: 22px;
+  padding: 30px 26px 26px;
+  overflow: hidden;
+  box-shadow: var(--home-shadow-card);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1),
+              border-color 0.35s, box-shadow 0.35s;
+}
+
+.room-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--home-mint), var(--home-mint-deep));
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.room-card::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--home-mint-fizz);
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.room-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(63, 207, 168, 0.4);
+  box-shadow: var(--home-shadow-lift);
+}
+
+.room-card:hover::before { opacity: 1; }
+.room-card:hover::after  { opacity: 1; transform: scale(1.2); }
+
+.room-icon {
+  font-size: 42px;
+  line-height: 1;
+  margin-bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: var(--home-mint-bg);
+  border-radius: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.room-name {
+  font-family: var(--font-jp-serif);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.room-en {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--home-mint-deep);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.room-desc {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--home-fg-soft);
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.room-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: var(--home-mint-deep);
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.room-card.is-soon {
+  opacity: 0.7;
+  pointer-events: none;
+  background: var(--home-bg-card);
+  box-shadow: 0 4px 12px rgba(31, 42, 38, 0.06);
+}
+
+.room-card.is-soon .room-icon {
+  background: rgba(31, 42, 38, 0.05);
+  filter: grayscale(0.4);
+}
+
+.room-card.is-soon .room-en {
+  color: var(--home-fg-mute);
+}
+
+.room-card.is-soon .room-status {
+  background: rgba(31, 42, 38, 0.08);
+  color: var(--home-fg-mute);
+}
+
+/* ---- 哲学エリア ---- */
+
+.entrance-philosophy {
+  text-align: center;
+  padding: 56px 32px;
+  border-radius: 28px;
+  margin-bottom: 32px;
+  background:
+    radial-gradient(circle at 50% 100%, rgba(95, 220, 185, 0.1), transparent 55%),
+    var(--home-bg-card);
+  border: 1px solid var(--home-line);
+  position: relative;
+  overflow: hidden;
+}
+
+.entrance-philosophy::before {
+  content: "🍃";
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  font-size: 28px;
+  opacity: 0.5;
+}
+
+.entrance-philosophy::after {
+  content: "🌱";
+  position: absolute;
+  bottom: 14px;
+  right: 18px;
+  font-size: 28px;
+  opacity: 0.5;
+}
+
+.entrance-philosophy h2 {
+  font-family: var(--font-jp-serif);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+  color: var(--home-fg);
+}
+
+.entrance-philosophy p {
+  font-size: 14.5px;
+  line-height: 2.2;
+  color: var(--home-fg-soft);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.entrance-philosophy p + p {
+  margin-top: 14px;
+}
+
+/* ---- 月ノみんと、何者？ ---- */
+
+.entrance-who {
+  text-align: center;
+  padding: 56px 24px 16px;
+  margin-bottom: 24px;
+}
+
+.who-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.who-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: var(--home-bg-card);
+  color: var(--home-mint-deep);
+  font-family: var(--font-jp-serif);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border: 1.5px solid var(--home-mint);
+  box-shadow: 0 4px 10px rgba(45, 185, 145, 0.1);
+  transition: transform 0.3s, background 0.3s, color 0.3s;
+  cursor: default;
+}
+
+.who-tag:hover {
+  transform: translateY(-3px) scale(1.06);
+  background: var(--home-mint-deep);
+  color: #fff;
+  border-color: var(--home-mint-deep);
+}
+
+.who-note {
+  font-size: 13.5px;
+  line-height: 2;
+  color: var(--home-fg-soft);
+  margin-top: 4px;
+}
+
+.who-note strong {
+  color: var(--home-mint-deep);
+  font-weight: 700;
+}
+
+/* ---- フッター ---- */
+
+.entrance-footer {
+  position: relative;
+  z-index: 1;
+  padding: 28px 32px;
+  background: transparent;
+}
+
+.entrance-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.entrance-footer .brand {
+  font-family: var(--font-jp-serif);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--home-fg-soft);
+  font-weight: 700;
+}
+
+.entrance-footer .links {
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+}
+
+.entrance-footer .links a {
+  color: var(--home-fg-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.entrance-footer .links a:hover {
+  color: var(--home-mint-deep);
+}
+
+.entrance-footer .meta {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--home-fg-mute);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ---- レスポンシブ ---- */
+
+@media (max-width: 640px) {
+  .entrance-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px 20px 24px;
+  }
+  .entrance-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  .entrance-main {
+    padding: 32px 20px 64px;
+  }
+  .entrance-hero h1 .accent::after {
+    right: -28px;
+    font-size: 22px;
+  }
+  .entrance-philosophy {
+    padding: 40px 24px;
+  }
+}

@@ -1061,3 +1061,143 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============ 書斎（みんとの書斎） ============ */
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.book-card {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 166, 87, 0.5);
+  box-shadow: var(--shadow-lift);
+}
+
+.book-cover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  background: var(--ink-3);
+}
+
+.book-meta {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.book-tag {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.book-tag.comic {
+  color: var(--mint);
+}
+
+.book-title {
+  font-family: var(--font-jp-serif);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-top: 2px;
+  letter-spacing: 0.01em;
+}
+
+.book-label {
+  font-size: 11px;
+  opacity: 0.65;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.book-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  font-family: var(--font-en);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--vermilion-soft);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.online-works {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.online-card {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px 22px;
+  text-decoration: none;
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.online-card:hover {
+  border-color: rgba(127, 223, 202, 0.4);
+  transform: translateY(-3px);
+}
+
+.online-name {
+  font-family: var(--font-jp-serif);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.online-en {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--mint);
+  text-transform: uppercase;
+}
+
+.online-desc {
+  font-size: 12px;
+  opacity: 0.78;
+  margin-top: 6px;
+  line-height: 1.7;
+}
+
+.disclosure {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px 22px;
+  font-size: 12px;
+  opacity: 0.7;
+  line-height: 1.8;
+}
