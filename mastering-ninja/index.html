@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mastering Ninja / マスタリング忍者 — みんと食堂 Desktop Apps</title>
+<meta name="description" content="Windows用スタンドアロン版のマスタリング補助ツール。WAVを読み込み、解析・A/Bプレビュー・WAV書き出しまでローカルPC上で行えます。">
+<meta property="og:title" content="Mastering Ninja / マスタリング忍者">
+<meta property="og:description" content="WAVを読み込み、解析・プレビュー・書き出しできるWindows用スタンドアロン版マスタリング補助ツール。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mintotsukino.github.io/MintoTsukino/mastering-ninja/">
+<meta property="og:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mastering Ninja / マスタリング忍者">
+<meta name="twitter:description" content="Windows用スタンドアロン版のマスタリング補助ツール。">
+<meta name="twitter:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="noren">
+  <div class="noren-inner">
+    <a href="../" class="brand">
+      <span class="brand-mark">🏮</span>
+      <div>
+        <div class="brand-name">みんと食堂</div>
+        <div class="brand-sub">MINTO TSUKINO &middot; AUDIO TOOLS</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="../">本日のメニュー</a>
+      <a href="../about/">お品書き</a>
+      <a href="../about/#contact">連絡先</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="plugin-hero desktop-hero">
+    <div class="plugin-icon-image-wrap">
+      <img src="../assets/img/mastering-ninja-icon.png" alt="Mastering Ninja アプリアイコン" class="plugin-icon-image">
+    </div>
+    <div class="plugin-meta">
+      <span class="plugin-tag">Desktop App &middot; Windows Portable</span>
+      <h1 class="plugin-title">Mastering Ninja<br><span>マスタリング忍者</span></h1>
+      <p class="plugin-tagline">
+        WAVを読み込み、解析し、<br>
+        原音と仕上げ後を聴き比べて、WAVとして書き出す。
+      </p>
+      <span class="plugin-version">● v0.1.0 preview &middot; Windows x64</span>
+      <div class="btn-row">
+        <a href="https://github.com/MintoTsukino/MintoTsukino/releases/download/mastering-ninja-v0.1.0/MasteringNinja-0.1.0-Windows-x64.exe" class="btn btn-primary">
+          ⬇  ダウンロード（exe）
+        </a>
+        <a href="#install" class="btn btn-ghost">使い方と注意</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="screenshot desktop-screenshot">
+    <div class="screenshot-frame">
+      <img src="../assets/img/mastering-ninja-app.png" alt="Mastering Ninja 画面 - 曲リスト、解析、A/Bプレビュー、仕上げタイプ、出力先、詳細設定" loading="lazy">
+    </div>
+    <p class="screenshot-caption">Mastering Ninja v0.1.0 &middot; Windows Desktop App</p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>できること</h2>
+      <span class="en">Key Features</span>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <span class="feature-icon">🎧</span>
+        <h3>WAVを読み込み</h3>
+        <p>ローカルPC上のWAVファイルを追加して、曲ごとの解析・プレビュー・書き出しを行えます。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">📊</span>
+        <h3>音量とピークを確認</h3>
+        <p>Peak / RMS / Referenceなど、仕上げの目安になる数値を表示します。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🅰️</span>
+        <h3>A/Bプレビュー</h3>
+        <p>原音と仕上げ後を切り替えて、耳で確認しながら作業できます。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🥷</span>
+        <h3>仕上げタイプ</h3>
+        <p>Streaming Balanceなどの仕上げタイプを選び、必要なら詳細設定で細かく調整できます。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">💾</span>
+        <h3>プロジェクト保存</h3>
+        <p>曲リスト・出力先・設定をプロジェクトファイルとして保存できます。</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">📦</span>
+        <h3>portable版</h3>
+        <p>インストーラーなしで起動できるWindows用exeです。VSTプラグインではありません。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="section-head">
+      <h2>使い方と注意</h2>
+      <span class="en">Usage &amp; Notes</span>
+    </div>
+
+    <div class="spec-block">
+      <h3>動作環境</h3>
+      <ul>
+        <li>Windows 10 / 11 x64</li>
+        <li>スタンドアロンアプリです。DAW用VSTプラグインではありません。</li>
+        <li>v0.1.0ではWAV入力 / WAV出力を対象にしています。</li>
+      </ul>
+    </div>
+
+    <div class="spec-block">
+      <h3>起動方法</h3>
+      <ul>
+        <li>ダウンロードした <code>MasteringNinja-0.1.0-Windows-x64.exe</code> を実行します。</li>
+        <li>インストール作業は不要です。</li>
+        <li>Windowsの保護画面が出る場合は、内容を確認してから実行してください。</li>
+      </ul>
+      <p class="note-text">
+        現在は個人制作の未署名exeです。環境によってはSmartScreenなどの警告が表示される場合があります。
+      </p>
+    </div>
+
+    <div class="spec-block">
+      <h3>基本操作</h3>
+      <ul>
+        <li><code>WAVを追加</code> ── 作業したい曲を読み込む</li>
+        <li><code>解析</code> ── 音量やピークの目安を確認する</li>
+        <li><code>プレビュー作成</code> ── 原音と仕上げ後を聴き比べる</li>
+        <li><code>仕上げタイプ</code> ── 仕上げの方向性を選ぶ</li>
+        <li><code>出力先を選ぶ</code> ── 書き出し先フォルダを指定する</li>
+        <li><code>WAVを書き出す</code> ── 仕上げ後のWAVを出力する</li>
+      </ul>
+    </div>
+
+    <div class="spec-block">
+      <h3>使用上のメモ</h3>
+      <ul>
+        <li>重要な音源は、元ファイルを残したままコピーで試してください。</li>
+        <li>v0.1.0 previewのため、音質や操作感は今後調整される可能性があります。</li>
+        <li>読み込んだ音声はローカルPC上で処理します。</li>
+      </ul>
+    </div>
+
+    <div class="spec-block">
+      <h3>利用条件</h3>
+      <ul>
+        <li>Mastering Ninjaは無料で利用できます。</li>
+        <li>個人制作・商用制作の音源にも利用できます。</li>
+        <li>本ツールは無保証で提供されます。重要な制作データはバックアップを残してください。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="download" class="download-panel">
+    <div class="download-panel-inner">
+      <span class="download-icon">🥷</span>
+      <h2>Mastering Ninja v0.1.0 preview</h2>
+      <p>Windows x64用 portable exe。WAVを読み、聴き比べ、書き出すための小さな作業台です。</p>
+      <a href="https://github.com/MintoTsukino/MintoTsukino/releases/download/mastering-ninja-v0.1.0/MasteringNinja-0.1.0-Windows-x64.exe" class="btn btn-primary">
+        ⬇  Mastering Ninja をダウンロード
+      </a>
+      <p class="download-meta">Windows x64 &middot; portable exe &middot; unsigned preview build</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="mark">🏮</span>みんと食堂
+    </div>
+    <div class="footer-links">
+      <a href="../">トップ</a>
+      <a href="../mastering/">マスタリングカウンター</a>
+      <a href="../popcornpop/">PopcornPop</a>
+      <a href="../hotelcurryspice/">HotelCurrySpice</a>
+      <a href="#download">ダウンロード</a>
+    </div>
+    <div class="footer-meta">&copy; Minto Tsukino &middot; MMXXVI</div>
+  </div>
+</footer>
+
+</body>
+</html>
