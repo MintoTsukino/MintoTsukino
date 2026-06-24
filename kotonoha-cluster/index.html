@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark only">
+<title>言ノ葉クラスター / Kotonoha Cluster — クロスメディア・プロジェクト</title>
+<meta name="description" content="月ノみんとによるクロスメディア・プロジェクト「言ノ葉クラスター / Kotonoha Cluster」。SF小説をオリジンとし、書籍版、そして架空バンドKCへとパラレルに展開する。">
+<meta property="og:title" content="言ノ葉クラスター / Kotonoha Cluster Project">
+<meta property="og:description" content="SF小説、書籍、架空バンドKC。月ノみんとのクロスメディア・プロジェクト。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mintotsukino.github.io/MintoTsukino/kotonoha-cluster/">
+<meta property="og:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/works/kotonoha-cluster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/works/kotonoha-cluster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Noto+Serif+JP:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark only;
+    --font-jp-serif: "Noto Serif JP", "Yu Mincho", serif;
+    --font-jp-sans: "Noto Sans JP", "Yu Gothic", sans-serif;
+    --font-en-serif: "Cormorant Garamond", "Times New Roman", serif;
+    --font-mono: "JetBrains Mono", "Consolas", monospace;
+
+    --bg: #0b0d1c;
+    --bg-2: #11142a;
+    --bg-3: #1a1e3a;
+    --bg-glass: rgba(20, 24, 50, 0.5);
+
+    --fg: #f0eada;
+    --fg-soft: rgba(240, 234, 218, 0.74);
+    --fg-mute: rgba(240, 234, 218, 0.46);
+
+    --ink: #1a1623;
+    --pearl: #f0eada;
+    --paper: #ece2c8;
+
+    --pink: #f0a5c0;
+    --pink-deep: #e07ca8;
+    --blue: #82b1ff;
+    --blue-deep: #5e7fff;
+    --silver: #c8d2e8;
+    --silver-soft: rgba(200, 210, 232, 0.45);
+
+    --line: rgba(200, 210, 232, 0.14);
+    --line-strong: rgba(200, 210, 232, 0.28);
+    --line-pink: rgba(240, 165, 192, 0.32);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-jp-sans);
+    line-height: 1.85;
+    font-size: 16px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 銀河感の背景 */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 0%, rgba(130, 177, 255, 0.12), transparent 50%),
+      radial-gradient(ellipse at 0% 80%, rgba(240, 165, 192, 0.1), transparent 55%),
+      radial-gradient(ellipse at 100% 100%, rgba(94, 127, 255, 0.08), transparent 55%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* 微細な紙テクスチャ */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg,
+        transparent 0,
+        transparent 3px,
+        rgba(200, 210, 232, 0.012) 3px,
+        rgba(200, 210, 232, 0.012) 4px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ヘッダー */
+  .kc-header {
+    position: relative;
+    z-index: 2;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .kc-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .kc-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--fg);
+  }
+  .kc-brand .mark {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 28px;
+    width: 46px; height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line-pink);
+    color: var(--pink);
+    background: rgba(240, 165, 192, 0.06);
+  }
+  .kc-brand .name {
+    font-family: var(--font-jp-serif);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+  .kc-brand .en {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--pink);
+    margin-top: 4px;
+  }
+  .kc-nav {
+    display: flex;
+    gap: 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .kc-nav a {
+    color: var(--fg-soft);
+    text-decoration: none;
+    padding: 4px 2px;
+    transition: color 0.2s;
+    font-weight: 600;
+  }
+  .kc-nav a:hover { color: var(--pink); }
+
+  /* メイン */
+  .kc-main {
+    position: relative;
+    z-index: 2;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 80px 32px 80px;
+  }
+
+  /* ヒーロー */
+  .kc-hero {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 20px 16px;
+  }
+  .kc-hero .label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    color: var(--blue);
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border: 1px solid rgba(130, 177, 255, 0.4);
+    background: rgba(130, 177, 255, 0.06);
+    margin-bottom: 32px;
+    font-weight: 700;
+  }
+  .kc-hero h1 {
+    font-family: var(--font-jp-serif);
+    font-size: clamp(40px, 7vw, 76px);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: 0.05em;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, var(--pearl) 0%, var(--pink) 70%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .kc-hero .en-title {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: clamp(20px, 3vw, 32px);
+    color: var(--pink);
+    letter-spacing: 0.1em;
+    margin-bottom: 36px;
+    font-weight: 500;
+  }
+  .kc-hero p.lead {
+    font-family: var(--font-jp-serif);
+    font-size: 15px;
+    line-height: 2.2;
+    color: var(--fg-soft);
+    max-width: 560px;
+    margin: 0 auto;
+    letter-spacing: 0.04em;
+  }
+  .kc-hero p.lead em {
+    color: var(--pink);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* セクションヘッド */
+  .kc-section-head {
+    margin: 64px 0 32px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .kc-section-head .num {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--pink);
+    font-weight: 500;
+  }
+  .kc-section-head h2 {
+    font-family: var(--font-jp-serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+  .kc-section-head .en {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg-mute);
+    margin-left: auto;
+  }
+
+  /* Origin: SF小説オリジナル */
+  .kc-origin {
+    background:
+      linear-gradient(180deg, rgba(130, 177, 255, 0.06), transparent 50%),
+      var(--bg-glass);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--blue);
+    padding: 32px 38px;
+    margin-bottom: 32px;
+    position: relative;
+    backdrop-filter: blur(4px);
+  }
+  .kc-origin::before {
+    content: "Origin";
+    position: absolute;
+    top: -12px; left: 24px;
+    background: var(--bg);
+    padding: 0 12px;
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--blue);
+  }
+  .kc-origin h3 {
+    font-family: var(--font-jp-serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .kc-origin .role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 700;
+  }
+  .kc-origin .role::before { content: ">> "; }
+  .kc-origin p {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--fg-soft);
+    margin-bottom: 14px;
+  }
+  .kc-origin .character {
+    margin-top: 20px;
+    padding: 18px 22px;
+    background: rgba(130, 177, 255, 0.04);
+    border: 1px dashed rgba(130, 177, 255, 0.32);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--fg-soft);
+    letter-spacing: 0.05em;
+  }
+  .kc-origin .character strong {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  /* 書籍カード */
+  .kc-book-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    align-items: start;
+    background:
+      linear-gradient(180deg, rgba(240, 165, 192, 0.04), transparent 50%),
+      var(--bg-glass);
+    border: 1px solid var(--line);
+    padding: 28px 32px;
+    margin-bottom: 32px;
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .kc-book-row:hover {
+    border-color: var(--pink);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(240, 165, 192, 0.12);
+  }
+  .kc-book-cover {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .kc-book-body { min-width: 0; }
+  .kc-book-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--pink);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .kc-book-tag::before { content: ">> "; }
+  .kc-book-body h3 {
+    font-family: var(--font-jp-serif);
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .kc-book-body .label {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--fg-mute);
+    margin-bottom: 14px;
+  }
+  .kc-book-body p {
+    font-size: 13.5px;
+    line-height: 1.95;
+    color: var(--fg-soft);
+    margin-bottom: 16px;
+  }
+  .kc-book-body .cta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--pink);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .kc-book-body .cta::after { content: " →"; }
+
+  /* パラレル分岐の演出 */
+  .kc-divider {
+    text-align: center;
+    margin: 56px 0;
+    position: relative;
+  }
+  .kc-divider::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--silver-soft), transparent);
+  }
+  .kc-divider span {
+    display: inline-block;
+    position: relative;
+    padding: 0 24px;
+    background: var(--bg);
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--silver);
+    letter-spacing: 0.2em;
+  }
+
+  /* バンド/KC */
+  .kc-band {
+    background:
+      linear-gradient(180deg, rgba(240, 165, 192, 0.08), transparent 50%),
+      var(--bg-glass);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--pink);
+    padding: 32px 38px;
+    margin-bottom: 32px;
+    position: relative;
+    backdrop-filter: blur(4px);
+  }
+  .kc-band::before {
+    content: "Parallel // Band";
+    position: absolute;
+    top: -12px; left: 24px;
+    background: var(--bg);
+    padding: 0 12px;
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--pink);
+  }
+  .kc-band h3 {
+    font-family: var(--font-en-serif);
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+    background: linear-gradient(135deg, var(--pink), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .kc-band .name-jp {
+    font-family: var(--font-jp-serif);
+    font-size: 15px;
+    color: var(--fg-soft);
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+  }
+  .kc-band p {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--fg-soft);
+    margin-bottom: 14px;
+  }
+  .kc-band .member {
+    margin-top: 20px;
+    padding: 18px 22px;
+    background: rgba(240, 165, 192, 0.04);
+    border: 1px dashed var(--line-pink);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--fg-soft);
+    letter-spacing: 0.05em;
+  }
+  .kc-band .member strong { color: var(--pink); font-weight: 700; }
+
+  /* メンバー紹介 */
+  .kc-band-narration {
+    margin: 26px 0 32px;
+    padding: 22px 26px;
+    background: rgba(11, 13, 28, 0.6);
+    border: 1px solid var(--line);
+    border-top: 1px solid var(--pink);
+    border-bottom: 1px solid var(--blue);
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 14.5px;
+    line-height: 1.95;
+    color: var(--fg-soft);
+    letter-spacing: 0.02em;
+  }
+  .kc-band-narration p + p { margin-top: 10px; }
+
+  .kc-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+  .kc-member {
+    position: relative;
+    padding: 24px 22px 22px;
+    background:
+      linear-gradient(180deg, rgba(11, 13, 28, 0.9), rgba(20, 24, 50, 0.6));
+    border: 1px solid var(--line);
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .kc-member::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--m-color, var(--pink));
+    opacity: 0.7;
+  }
+  .kc-member::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 32px; height: 32px;
+    border-bottom: 2px solid var(--m-color, var(--pink));
+    border-right: 2px solid var(--m-color, var(--pink));
+    opacity: 0.55;
+  }
+  .kc-member:hover {
+    transform: translateY(-5px);
+    border-color: var(--m-color, var(--pink));
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.5), 0 0 22px color-mix(in srgb, var(--m-color, var(--pink)) 25%, transparent);
+  }
+  .kc-member .role {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--m-color, var(--pink));
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .kc-member .role::before { content: ">> "; }
+  .kc-member h4 {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--fg);
+    margin-bottom: 12px;
+    line-height: 1.05;
+  }
+  .kc-member p {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--fg-soft);
+    margin: 0;
+  }
+  .kc-member p em {
+    color: var(--m-color, var(--pink));
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* 締めのナレーション */
+  .kc-band-close {
+    text-align: center;
+    padding: 32px 24px;
+    border: 1px dashed var(--line-pink);
+    background: rgba(240, 165, 192, 0.03);
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 2;
+    color: var(--fg-soft);
+    letter-spacing: 0.04em;
+  }
+  .kc-band-close strong {
+    color: var(--pink);
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  /* メディア（動画） */
+  .kc-media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .kc-media-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .kc-media-cell .label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--pink);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .kc-media-cell .label::before { content: ">> "; }
+  .kc-video-wrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--line-pink);
+    background: var(--bg);
+    overflow: hidden;
+    box-shadow: 0 0 24px rgba(240, 165, 192, 0.16);
+  }
+  .kc-video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* リンクカード */
+  .kc-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .kc-link {
+    display: block;
+    padding: 22px 24px;
+    background: var(--bg-glass);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--fg);
+    backdrop-filter: blur(4px);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .kc-link:hover {
+    border-color: var(--pink);
+    transform: translateY(-3px);
+  }
+  .kc-link .platform {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--blue);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .kc-link .name {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .kc-link .name-jp {
+    font-family: var(--font-jp-sans);
+    font-size: 12.5px;
+    color: var(--fg-soft);
+    margin-top: 4px;
+  }
+  .kc-link .cta {
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--pink);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .kc-link .cta::after { content: " →"; }
+
+  /* フッター */
+  .kc-footer {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid var(--line);
+    padding: 28px 32px;
+  }
+  .kc-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .kc-footer .brand {
+    font-family: var(--font-jp-serif);
+    font-size: 14px;
+    color: var(--fg-soft);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  .kc-footer .links {
+    display: flex;
+    gap: 18px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .kc-footer .links a {
+    color: var(--fg-soft);
+    text-decoration: none;
+  }
+  .kc-footer .links a:hover { color: var(--pink); }
+  .kc-footer .meta {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--fg-mute);
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 720px) {
+    .kc-inner { flex-direction: column; text-align: center; }
+    .kc-nav { flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .kc-main { padding: 56px 20px 64px; }
+    .kc-book-row { grid-template-columns: 1fr; text-align: center; }
+    .kc-book-cover { max-width: 180px; margin: 0 auto; }
+    .kc-media-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="kc-header">
+  <div class="kc-inner">
+    <a href="../" class="kc-brand">
+      <span class="mark">K</span>
+      <div>
+        <div class="name">言ノ葉クラスター</div>
+        <div class="en">Kotonoha Cluster</div>
+      </div>
+    </a>
+    <nav class="kc-nav">
+      <a href="../">Home</a>
+      <a href="../shosai/">Studio</a>
+      <a href="../ongaku/asr/">ASR</a>
+      <a href="../about/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="kc-main">
+
+  <section class="kc-hero">
+    <div class="label">// Cross-Media Project</div>
+    <h1>言ノ葉クラスター</h1>
+    <div class="en-title">Kotonoha Cluster</div>
+    <p class="lead">
+      <em>言葉</em>と<em>音</em>が螺旋状に絡み合う、<br>
+      月ノみんとの<em>クロスメディア・プロジェクト</em>。
+    </p>
+    <p class="lead" style="margin-top: 22px;">
+      SF小説をオリジンとして、書籍へ、そして<br>
+      パラレルワールドの架空バンドへと枝分かれする物語。
+    </p>
+  </section>
+
+  <section>
+    <div class="kc-section-head">
+      <span class="num">i</span>
+      <h2>はじまり</h2>
+      <span class="en">Origin</span>
+    </div>
+
+    <div class="kc-origin">
+      <h3>言ノ葉クラスター</h3>
+      <p class="role">SF Novel — Original Source</p>
+      <p>
+        プロジェクトのすべての中心にあるのは、月ノみんとによるSF小説『<strong>言ノ葉クラスター</strong>』。
+        言葉が物質的な構造として可視化される世界で、ひとりの少年が「クラスター」と呼ばれる現象に巻き込まれていく物語です。
+      </p>
+      <p>
+        このオリジナル小説は、カクヨムで公開されています。
+      </p>
+      <div class="character">
+        <strong>主人公：浅葱 識（あさぎ しき）</strong><br>
+        Sf novel protagonist. 観測者であり、当事者でもある少年。
+      </div>
+      <p style="margin-top: 18px;">
+        <a href="https://kakuyomu.jp/works/16818622176995491420" target="_blank" rel="noopener" style="color: var(--blue); text-decoration: none; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; font-weight: 700;">>> READ ON KAKUYOMU →</a>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="kc-section-head">
+      <span class="num">ii</span>
+      <h2>書籍版</h2>
+      <span class="en">Published Edition</span>
+    </div>
+
+    <a href="https://amzn.to/4uXXtbh" target="_blank" rel="noopener nofollow sponsored" class="kc-book-row">
+      <img src="../assets/img/works/kotonoha-cluster.jpg" alt="言ノ葉クラスター 書籍版" class="kc-book-cover">
+      <div class="kc-book-body">
+        <div class="kc-book-tag">Book // Published</div>
+        <h3>言ノ葉クラスター</h3>
+        <div class="label">Tsukuyomi Books · KDP</div>
+        <p>
+          オリジナル小説を電子書籍として書籍化したバージョン。
+          ツクヨミブックスからKindleで配信されています。
+          オリジン作品を手元に置きたい方へ。
+        </p>
+        <span class="cta">Amazon で見る</span>
+      </div>
+    </a>
+  </section>
+
+  <div class="kc-divider">
+    <span>// Parallel World</span>
+  </div>
+
+  <section>
+    <div class="kc-section-head">
+      <span class="num">iii</span>
+      <h2>架空バンド KC</h2>
+      <span class="en">Fictional Band — Parallel</span>
+    </div>
+
+    <div class="kc-band">
+      <h3>KOTONOHA CLUSTER</h3>
+      <div class="name-jp">通称：KC / コトクラ</div>
+      <p>
+        オリジナルSF小説から<strong style="color: var(--pink); font-weight: 700;">名前だけを借りた</strong>架空バンド。
+        ASR（Anomaly Sound Record）所属のアーティストとして音源を発信しています。
+      </p>
+      <p>
+        重要なのは、<strong style="color: var(--pink); font-weight: 700;">この KC は小説の世界とは直接的には無関係</strong>であること。
+        小説のオリジンを「パラレルワールド」として並走する別世界の存在として描かれています。
+      </p>
+
+      <div class="kc-band-narration">
+        <p>Born from a fractured neon city,<br>
+          each member comes from their own universe.</p>
+      </div>
+
+      <div class="kc-members">
+
+        <div class="kc-member" style="--m-color: #f0a5c0;">
+          <div class="role">Vocal // Poet</div>
+          <h4>SHIKI</h4>
+          <p>The <em>masked poet</em> of glitch and static.<br>グリッチとノイズに身を隠す、仮面の詩人。</p>
+        </div>
+
+        <div class="kc-member" style="--m-color: #82b1ff;">
+          <div class="role">Vocal // Spark</div>
+          <h4>Holo-Neko</h4>
+          <p>The <em>fragile spark</em> behind HollowHollow.<br>「HollowHollow」の奥にひそむ儚い火花。</p>
+        </div>
+
+        <div class="kc-member" style="--m-color: #c8d2e8;">
+          <div class="role">Drift // Beat</div>
+          <h4>LOWL1FE</h4>
+          <p>The <em>silent drifter</em> of Sector-9.<br>Sector-9の静かな漂流者。</p>
+        </div>
+
+        <div class="kc-member" style="--m-color: #5feaff;">
+          <div class="role">Architect // Noise</div>
+          <h4>DEADWIRE</h4>
+          <p>The <em>electric architect</em> of cyan-pink noise.<br>シアンとピンクのノイズを設計する、電気の建築家。</p>
+        </div>
+
+      </div>
+
+      <div class="kc-band-close">
+        When these four anomalies gather,<br>
+        their sound becomes a <strong>single echo</strong> —<br>
+        a blend of poetry, neon, and broken memories.<br><br>
+        <em>Welcome to the world of Kotonoha Cluster,<br>
+        a band born between noise and silence.</em>
+      </div>
+    </div>
+
+    <div class="kc-media-grid">
+
+      <div class="kc-media-cell">
+        <span class="label">About // Project Intro</span>
+        <div class="kc-video-wrap">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/yI_FAkzOEy4?rel=0&modestbranding=1"
+            title="Kotonoha Cluster — About"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="kc-media-cell">
+        <span class="label">1st Single // MV</span>
+        <div class="kc-video-wrap">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/voL18Lgn4Ug?rel=0&modestbranding=1"
+            title="Kotonoha Cluster — 1st Single MV"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="kc-media-cell">
+        <span class="label">1st Album // Full</span>
+        <div class="kc-video-wrap">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/pFO-XfSEcVw?rel=0&modestbranding=1"
+            title="Kotonoha Cluster — 1st Album Full"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="kc-media-cell">
+        <span class="label">Anime // Episode 01</span>
+        <div class="kc-video-wrap">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/g-whPSFN110?rel=0&modestbranding=1"
+            title="Kotonoha Cluster — Anime Episode 01"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="kc-section-head">
+      <span class="num">iv</span>
+      <h2>各プラットフォーム</h2>
+      <span class="en">Find Kotonoha Cluster</span>
+    </div>
+
+    <div class="kc-links">
+
+      <a href="https://kakuyomu.jp/works/16818622176995491420" target="_blank" rel="noopener" class="kc-link">
+        <div class="platform">Kakuyomu</div>
+        <div class="name">Kotonoha Cluster</div>
+        <div class="name-jp">オリジナルSF小説</div>
+        <div class="cta">Read</div>
+      </a>
+
+      <a href="https://amzn.to/4uXXtbh" target="_blank" rel="noopener nofollow sponsored" class="kc-link">
+        <div class="platform">Amazon · KDP</div>
+        <div class="name">Kotonoha Cluster</div>
+        <div class="name-jp">書籍版 (ツクヨミブックス)</div>
+        <div class="cta">Buy</div>
+      </a>
+
+      <a href="../ongaku/asr/" class="kc-link">
+        <div class="platform">ASR // Roster</div>
+        <div class="name">Kotonoha Cluster</div>
+        <div class="name-jp">架空バンド KC</div>
+        <div class="cta">Visit ASR</div>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="kc-footer">
+  <div class="kc-footer-inner">
+    <div class="brand">言ノ葉クラスター // Kotonoha Cluster</div>
+    <div class="links">
+      <a href="../">Home</a>
+      <a href="../ongaku/asr/">ASR</a>
+      <a href="../shosai/">Studio</a>
+      <a href="../about/#contact">Contact</a>
+    </div>
+    <div class="meta">© Minto Tsukino · 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark only">
+<title>ASR / Anomaly Sound Record — 月ノみんと主催の架空音楽レーベル</title>
+<meta name="description" content="ASR（Anomaly Sound Record）。月ノみんとが主催する架空音楽レーベル。サイバーパンク的世界観で実験的な音楽を発信。">
+<meta property="og:title" content="ASR / Anomaly Sound Record">
+<meta property="og:description" content="月ノみんと主催の架空音楽レーベル。Anomaly Sound Record。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mintotsukino.github.io/MintoTsukino/ongaku/asr/">
+<meta property="og:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/asr-logo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/asr-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Orbitron:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark only;
+    --font-jp: "Noto Sans JP", "Yu Gothic", sans-serif;
+    --font-en: "Orbitron", "Inter", sans-serif;
+    --font-mono: "JetBrains Mono", "Consolas", monospace;
+
+    --bg: #06030f;
+    --bg-2: #0c0721;
+    --bg-3: #14093a;
+    --bg-glass: rgba(20, 9, 58, 0.5);
+    --fg: #f0e8ff;
+    --fg-soft: rgba(240, 232, 255, 0.7);
+    --fg-mute: rgba(240, 232, 255, 0.42);
+
+    --neon-pink: #ff2a85;
+    --neon-pink-soft: #ff7ab3;
+    --neon-cyan: #5feaff;
+    --neon-cyan-soft: #9af3ff;
+    --neon-purple: #a855f7;
+    --neon-purple-soft: #c084fc;
+    --neon-amber: #ffcc33;
+
+    --line: rgba(168, 85, 247, 0.18);
+    --line-strong: rgba(255, 42, 133, 0.42);
+
+    --glow-pink: 0 0 28px rgba(255, 42, 133, 0.55);
+    --glow-cyan: 0 0 28px rgba(95, 234, 255, 0.5);
+    --glow-purple: 0 0 32px rgba(168, 85, 247, 0.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-jp);
+    line-height: 1.75;
+    font-size: 16px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* グリッド背景 */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 0%, rgba(255, 42, 133, 0.18), transparent 50%),
+      radial-gradient(ellipse at 0% 80%, rgba(95, 234, 255, 0.12), transparent 55%),
+      radial-gradient(ellipse at 100% 100%, rgba(168, 85, 247, 0.18), transparent 50%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* スキャンライン */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg,
+        transparent 0,
+        transparent 3px,
+        rgba(95, 234, 255, 0.025) 3px,
+        rgba(95, 234, 255, 0.025) 4px),
+      repeating-linear-gradient(90deg,
+        transparent 0,
+        transparent 80px,
+        rgba(168, 85, 247, 0.04) 80px,
+        rgba(168, 85, 247, 0.04) 81px);
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+  }
+
+  /* ヘッダー */
+  .asr-header {
+    position: relative;
+    z-index: 2;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .asr-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .asr-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--fg);
+  }
+  .asr-brand .mark {
+    width: 46px; height: 46px;
+    border-radius: 10px;
+    border: 1px solid var(--neon-pink);
+    background: #000;
+    box-shadow: var(--glow-pink);
+    overflow: hidden;
+    display: block;
+  }
+  .asr-brand .mark img {
+    width: 100%; height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .asr-brand .name {
+    font-family: var(--font-en);
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    color: var(--fg);
+    line-height: 1;
+  }
+  .asr-brand .sub {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--neon-cyan);
+    margin-top: 5px;
+    text-transform: uppercase;
+  }
+  .asr-nav {
+    display: flex;
+    gap: 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .asr-nav a {
+    color: var(--fg-soft);
+    text-decoration: none;
+    padding: 4px 2px;
+    transition: color 0.2s, text-shadow 0.2s;
+    font-weight: 600;
+  }
+  .asr-nav a:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 14px rgba(95, 234, 255, 0.7);
+  }
+  .asr-nav a::before {
+    content: "[ ";
+    opacity: 0.3;
+  }
+  .asr-nav a::after {
+    content: " ]";
+    opacity: 0.3;
+  }
+
+  /* メイン */
+  .asr-main {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 32px 80px;
+  }
+
+  /* ヒーロー */
+  .asr-hero {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 20px 16px;
+    position: relative;
+  }
+  .asr-hero-logo {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 32px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 42, 133, 0.5);
+    overflow: hidden;
+    background: #000;
+    box-shadow:
+      0 0 60px rgba(255, 42, 133, 0.35),
+      0 0 120px rgba(168, 85, 247, 0.18),
+      inset 0 0 0 1px rgba(95, 234, 255, 0.18);
+    position: relative;
+  }
+  .asr-hero-logo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg,
+        transparent 0,
+        transparent 2px,
+        rgba(95, 234, 255, 0.08) 2px,
+        rgba(95, 234, 255, 0.08) 3px);
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+  .asr-hero-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .asr-hero .label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding: 6px 16px;
+    border: 1px solid var(--neon-cyan);
+    border-radius: 0;
+    background: rgba(95, 234, 255, 0.06);
+    box-shadow: var(--glow-cyan);
+    font-weight: 700;
+  }
+  .asr-hero .label::before { content: "// "; }
+  .asr-hero .label::after { content: " //"; }
+
+  .asr-hero h1 {
+    font-family: var(--font-en);
+    font-size: clamp(48px, 9vw, 96px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    margin-bottom: 18px;
+    background: linear-gradient(120deg, var(--neon-pink) 0%, var(--neon-purple) 50%, var(--neon-cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+      0 0 60px rgba(255, 42, 133, 0.32);
+    position: relative;
+  }
+
+  .asr-hero .glitch {
+    display: inline-block;
+    position: relative;
+    animation: glitch-shift 6s ease-in-out infinite;
+  }
+
+  @keyframes glitch-shift {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 1px); }
+    40% { transform: translate(2px, -1px); }
+    60% { transform: translate(-1px, 2px); }
+    80% { transform: translate(1px, -2px); }
+  }
+
+  .asr-hero .subtitle {
+    font-family: var(--font-en);
+    font-size: clamp(14px, 1.8vw, 18px);
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    color: var(--neon-pink-soft);
+    margin-bottom: 36px;
+    text-transform: uppercase;
+  }
+
+  .asr-hero p.tagline {
+    font-family: var(--font-jp);
+    font-size: 14px;
+    color: var(--fg-soft);
+    line-height: 2;
+    max-width: 540px;
+    margin: 0 auto;
+    letter-spacing: 0.04em;
+  }
+
+  .asr-hero p.tagline strong {
+    color: var(--neon-cyan);
+    font-weight: 700;
+  }
+
+  /* セクションヘッド */
+  .asr-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 60px 0 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .asr-section-head::before {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -1px;
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-pink), transparent);
+    box-shadow: var(--glow-pink);
+  }
+  .asr-section-head .num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--neon-cyan);
+    font-weight: 700;
+  }
+  .asr-section-head h2 {
+    font-family: var(--font-en);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--fg);
+    text-transform: uppercase;
+  }
+  .asr-section-head .en {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--fg-mute);
+    margin-left: auto;
+    text-transform: uppercase;
+  }
+
+  /* 動画埋め込み */
+  .asr-video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid var(--neon-pink);
+    box-shadow:
+      var(--glow-pink),
+      inset 0 0 0 1px rgba(255, 42, 133, 0.2);
+    background: var(--bg);
+    margin-bottom: 16px;
+  }
+  .asr-video-wrap::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 60px; height: 60px;
+    border-top: 2px solid var(--neon-cyan);
+    border-left: 2px solid var(--neon-cyan);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .asr-video-wrap::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 60px; height: 60px;
+    border-bottom: 2px solid var(--neon-pink);
+    border-right: 2px solid var(--neon-pink);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .asr-video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .asr-video-caption {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--fg-mute);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .asr-video-caption::before { content: ">> "; color: var(--neon-cyan); }
+
+  /* About ブロック */
+  .asr-about {
+    background:
+      linear-gradient(180deg, rgba(168, 85, 247, 0.08), transparent 50%),
+      var(--bg-glass);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--neon-purple);
+    padding: 36px 40px;
+    backdrop-filter: blur(4px);
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .asr-about::before {
+    content: "[ ABOUT ]";
+    position: absolute;
+    top: -10px; left: 24px;
+    background: var(--bg);
+    padding: 0 12px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--neon-purple);
+    font-weight: 700;
+  }
+  .asr-about p {
+    font-size: 14.5px;
+    line-height: 2;
+    color: var(--fg-soft);
+    margin-bottom: 14px;
+  }
+  .asr-about p:last-child { margin-bottom: 0; }
+  .asr-about strong {
+    color: var(--neon-cyan);
+    font-weight: 700;
+  }
+
+  /* Artists / 所属アーティスト */
+  .asr-artist {
+    background:
+      linear-gradient(180deg, rgba(255, 42, 133, 0.06), transparent 50%),
+      var(--bg-glass);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--neon-pink);
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    position: relative;
+    backdrop-filter: blur(4px);
+  }
+  .asr-artist::before {
+    content: attr(data-tag);
+    position: absolute;
+    top: -10px; left: 24px;
+    background: var(--bg);
+    padding: 0 12px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--neon-pink);
+    font-weight: 700;
+  }
+  .asr-artist.alt {
+    border-left-color: var(--neon-cyan);
+  }
+  .asr-artist.alt::before {
+    color: var(--neon-cyan);
+  }
+  .asr-artist.alt .asr-artist-name {
+    background: linear-gradient(120deg, var(--neon-cyan), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .asr-artist.mauve {
+    border-left-color: var(--neon-purple);
+  }
+  .asr-artist.mauve::before {
+    color: var(--neon-purple);
+  }
+  .asr-artist.mauve .asr-artist-name {
+    background: linear-gradient(120deg, var(--neon-purple), var(--neon-amber));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* その他大勢の架空アーティスト */
+  .asr-mystery {
+    border: 1px dashed rgba(95, 234, 255, 0.32);
+    border-left: 3px dashed var(--neon-cyan);
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.08), transparent 70%),
+      var(--bg-glass);
+    padding: 28px 36px;
+    margin-bottom: 32px;
+    position: relative;
+    backdrop-filter: blur(4px);
+  }
+  .asr-mystery::before {
+    content: "[ ARTIST // ??? ]";
+    position: absolute;
+    top: -10px; left: 24px;
+    background: var(--bg);
+    padding: 0 12px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--neon-cyan);
+    font-weight: 700;
+  }
+  .asr-mystery-name {
+    font-family: var(--font-en);
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    background: linear-gradient(120deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .asr-mystery-name-jp {
+    font-family: var(--font-jp);
+    font-size: 13px;
+    color: var(--fg-soft);
+    text-align: center;
+    margin-bottom: 18px;
+    letter-spacing: 0.1em;
+  }
+  .asr-mystery p {
+    font-size: 13px;
+    line-height: 2;
+    color: var(--fg-soft);
+    text-align: center;
+    max-width: 540px;
+    margin: 0 auto 18px;
+  }
+  .asr-mystery-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .asr-mystery-tags span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--fg-mute);
+    padding: 4px 12px;
+    border: 1px solid rgba(255, 42, 133, 0.22);
+    background: rgba(255, 42, 133, 0.04);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .asr-artist-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .asr-artist-name {
+    font-family: var(--font-en);
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    background: linear-gradient(120deg, var(--neon-pink), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .asr-artist-name-jp {
+    font-family: var(--font-jp);
+    font-size: 14px;
+    color: var(--fg-soft);
+    letter-spacing: 0.06em;
+  }
+  .asr-artist-desc {
+    font-size: 13.5px;
+    line-height: 1.95;
+    color: var(--fg-soft);
+    margin-bottom: 18px;
+  }
+  .asr-artist-track {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .asr-artist-track::before { content: ">> "; }
+
+  /* 動画グリッド（4分割） */
+  .asr-video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .asr-video-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .asr-video-cell .label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .asr-video-cell .label::before { content: ">> "; }
+  .asr-video-cell .asr-video-wrap {
+    margin-bottom: 0;
+  }
+  .asr-video-placeholder {
+    aspect-ratio: 16 / 9;
+    background:
+      linear-gradient(135deg, rgba(168, 85, 247, 0.08), transparent 60%),
+      var(--bg-2);
+    border: 1px dashed rgba(255, 42, 133, 0.32);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: var(--fg-mute);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .asr-video-placeholder::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 36px; height: 36px;
+    border-top: 2px solid rgba(95, 234, 255, 0.42);
+    border-left: 2px solid rgba(95, 234, 255, 0.42);
+  }
+  .asr-video-placeholder::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 36px; height: 36px;
+    border-bottom: 2px solid rgba(255, 42, 133, 0.42);
+    border-right: 2px solid rgba(255, 42, 133, 0.42);
+  }
+  .asr-video-placeholder span {
+    z-index: 1;
+    padding: 0 12px;
+  }
+
+  @media (max-width: 640px) {
+    .asr-video-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* チャンネルリンクカード */
+  .asr-channels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .asr-channel {
+    display: block;
+    padding: 22px 24px;
+    background:
+      linear-gradient(135deg, rgba(255, 42, 133, 0.04), transparent 60%),
+      var(--bg-glass);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+  }
+  .asr-channel::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .asr-channel:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-pink);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), var(--glow-pink);
+  }
+  .asr-channel:hover::before { opacity: 1; }
+  .asr-channel .platform {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .asr-channel .name {
+    font-family: var(--font-en);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--fg);
+  }
+  .asr-channel .name-jp {
+    font-family: var(--font-jp);
+    font-size: 12px;
+    color: var(--fg-soft);
+    margin-top: 4px;
+  }
+  .asr-channel .cta {
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--neon-pink);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .asr-channel .cta::after { content: " ->"; }
+
+  /* コンタクトブロック */
+  .asr-contact {
+    text-align: center;
+    padding: 36px 24px;
+    border: 1px dashed var(--line-strong);
+    background: rgba(255, 42, 133, 0.03);
+    margin-bottom: 24px;
+  }
+  .asr-contact p {
+    font-size: 13.5px;
+    color: var(--fg-soft);
+    line-height: 1.95;
+  }
+  .asr-contact a {
+    color: var(--neon-pink);
+    text-decoration: none;
+    font-weight: 700;
+    text-shadow: 0 0 12px rgba(255, 42, 133, 0.5);
+  }
+  .asr-contact a:hover { color: var(--neon-cyan); text-shadow: 0 0 12px rgba(95, 234, 255, 0.5); }
+
+  /* フッター */
+  .asr-footer {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid var(--line);
+    padding: 28px 32px;
+  }
+  .asr-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .asr-footer .brand {
+    font-family: var(--font-en);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--fg-soft);
+    font-weight: 700;
+  }
+  .asr-footer .links {
+    display: flex;
+    gap: 18px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .asr-footer .links a {
+    color: var(--fg-soft);
+    text-decoration: none;
+  }
+  .asr-footer .links a:hover {
+    color: var(--neon-cyan);
+  }
+  .asr-footer .meta {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--fg-mute);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .asr-inner { flex-direction: column; text-align: center; }
+    .asr-nav { flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .asr-main { padding: 48px 20px 64px; }
+    .asr-about { padding: 28px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="asr-header">
+  <div class="asr-inner">
+    <a href="../" class="asr-brand">
+      <span class="mark"><img src="../../assets/img/asr-logo.jpg" alt="ASR logo"></span>
+      <div>
+        <div class="name">ASR</div>
+        <div class="sub">Anomaly Sound Record</div>
+      </div>
+    </a>
+    <nav class="asr-nav">
+      <a href="../../">Home</a>
+      <a href="../">Music Room</a>
+      <a href="../../shokudo/">Shokudo</a>
+      <a href="../../about/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="asr-main">
+
+  <section class="asr-hero">
+    <div class="asr-hero-logo">
+      <img src="../../assets/img/asr-logo.jpg" alt="ASR / Anomaly Sound Record logo">
+    </div>
+    <div class="label">Virtual Music Label</div>
+    <h1>
+      <span class="glitch">ANOMALY</span><br>
+      <span class="glitch">SOUND&nbsp;RECORD</span>
+    </h1>
+    <div class="subtitle">A.S.R.</div>
+    <p class="tagline">
+      月ノみんと主催の <strong>架空音楽レーベル</strong>。<br>
+      実験的な音と、ちょっと外れた周波数のための場所。
+    </p>
+  </section>
+
+  <section>
+    <div class="asr-section-head">
+      <span class="num">// 01</span>
+      <h2>About ASR</h2>
+      <span class="en">Watch the intro</span>
+    </div>
+
+    <div class="asr-video-wrap">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/pLkg6zi_L9Q?rel=0&modestbranding=1"
+        title="ASR / Anomaly Sound Record — Intro"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+    <p class="asr-video-caption">ASR — Anomaly Sound Record Introduction</p>
+  </section>
+
+  <section>
+    <div class="asr-section-head">
+      <span class="num">// 02</span>
+      <h2>What is ASR</h2>
+      <span class="en">Concept</span>
+    </div>
+
+    <div class="asr-about">
+      <p>
+        <strong>ASR（Anomaly Sound Record）</strong>は、<br>
+        月ノみんとが主催する <strong>架空の音楽レーベル</strong>です。
+      </p>
+      <p>
+        「アノマリー」── 通常から外れた、特異な、異常な現象。<br>
+        既存のジャンルやルールから少し外れた音を、ひとつの世界観のもとに集める場所として設計されています。
+      </p>
+      <p>
+        実体としてのレーベルではなく、<strong>世界観の入れ物</strong>として機能する音楽プロジェクト。<br>
+        ボカロ別名義「狂忘（kuruwasu）」もこのレーベルから派生しています。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="asr-section-head">
+      <span class="num">// 03</span>
+      <h2>Artists</h2>
+      <span class="en">Roster</span>
+    </div>
+
+    <div class="asr-artist" data-tag="[ ARTIST // 01 ]">
+      <div class="asr-artist-head">
+        <div class="asr-artist-name">KOTONOHA CLUSTER</div>
+        <div class="asr-artist-name-jp">言ノ葉クラスター</div>
+      </div>
+      <p class="asr-artist-desc">
+        ASR第一弾アーティスト。<br>
+        言葉と音が螺旋状に絡み合う、ナラティブ・サウンド型のプロジェクト。
+      </p>
+
+      <div class="asr-video-grid">
+
+        <div class="asr-video-cell">
+          <span class="label">About // Project Intro</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/yI_FAkzOEy4?rel=0&modestbranding=1"
+              title="Kotonoha Cluster — About"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="asr-video-cell">
+          <span class="label">1st Single // MV</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/voL18Lgn4Ug?rel=0&modestbranding=1"
+              title="Kotonoha Cluster — 1st Single MV"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="asr-video-cell">
+          <span class="label">1st Album // Full</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/pFO-XfSEcVw?rel=0&modestbranding=1"
+              title="Kotonoha Cluster — 1st Album Full"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="asr-video-cell">
+          <span class="label">Anime // Episode 01</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/g-whPSFN110?rel=0&modestbranding=1"
+              title="Kotonoha Cluster — Anime Episode 01"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="asr-artist alt" data-tag="[ ARTIST // 02 ]">
+      <div class="asr-artist-head">
+        <div class="asr-artist-name">LOWL1FE.</div>
+        <div class="asr-artist-name-jp">ロウライフ</div>
+      </div>
+      <p class="asr-artist-desc">
+        ASR第二弾アーティスト。<br>
+        ストリートの低空飛行から綴る、ヒップホップ／ラップ・プロジェクト。
+      </p>
+
+      <div class="asr-video-grid">
+
+        <div class="asr-video-cell">
+          <span class="label">1st MV</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/8y3No0BXfPE?rel=0&modestbranding=1"
+              title="LOWL1FE. — 1st MV"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="asr-video-cell">
+          <span class="label">2nd MV</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/se2QVrOJDF8?rel=0&modestbranding=1"
+              title="LOWL1FE. — 2nd MV"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="asr-video-cell">
+          <span class="label">1st Album // Full</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/Cf-xiBzdwFM?rel=0&modestbranding=1"
+              title="LOWL1FE. — 1st Album Full"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="asr-video-cell">
+          <span class="label">Slot 04</span>
+          <div class="asr-video-placeholder"><span>Coming Soon</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="asr-artist mauve" data-tag="[ ARTIST // 03 ]">
+      <div class="asr-artist-head">
+        <div class="asr-artist-name">KURUWASU / MINTO TSUKINO</div>
+        <div class="asr-artist-name-jp">狂忘 / 月ノみんと</div>
+      </div>
+      <p class="asr-artist-desc">
+        ASR主宰本人による名義。<br>
+        ボカロ楽曲は <strong>狂忘（kuruwasu）</strong>、歌い手・カバー活動は <strong>月ノみんと</strong> として展開。
+      </p>
+
+      <div class="asr-video-grid">
+
+        <div class="asr-video-cell">
+          <span class="label">Signature Track</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/3_JOnJ6UFHY?rel=0&modestbranding=1"
+              title="Kuruwasu / Minto Tsukino — Signature Track"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="asr-video-cell">
+          <span class="label">4th Album</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/r9oCxSoEJcc?rel=0&modestbranding=1"
+              title="Kuruwasu / Minto Tsukino — 4th Album"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="asr-video-cell">
+          <span class="label">First Upload // Origin</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/WCV15eJcHmo?rel=0&modestbranding=1"
+              title="Kuruwasu / Minto Tsukino — First Upload"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="asr-video-cell">
+          <span class="label">Cover // 歌ってみた</span>
+          <div class="asr-video-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/InSqr6OSy7A?rel=0&modestbranding=1"
+              title="Minto Tsukino — Cover"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="asr-mystery">
+      <div class="asr-mystery-name">+ Many More Fictional Artists</div>
+      <div class="asr-mystery-name-jp">その他大勢の架空アーティスト</div>
+      <p>
+        ASRの仮想スタジオには、まだ何人もの架空アーティストたちが息をひそめています。<br>
+        名義非開示、所属未確定、デモ音源は虚空に流れている。<br>
+        いつか、ふと、また誰かが姿を現すかもしれません。
+      </p>
+      <div class="asr-mystery-tags">
+        <span>[ Redacted ]</span>
+        <span>[ Anonymous ]</span>
+        <span>[ Pending ]</span>
+        <span>[ ??? ]</span>
+        <span>[ Phantom ]</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="asr-section-head">
+      <span class="num">// 04</span>
+      <h2>Channels</h2>
+      <span class="en">Find ASR</span>
+    </div>
+
+    <div class="asr-channels">
+
+      <a href="https://www.youtube.com/@%E7%8B%82%E5%BF%98-%E6%9C%88%E3%83%8E%E3%81%BF%E3%82%93%E3%81%A8%E3%81%AE%E9%9F%B3%E6%A5%BD%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB/videos" target="_blank" rel="noopener" class="asr-channel">
+        <div class="platform">YouTube</div>
+        <div class="name">ASR Studio</div>
+        <div class="name-jp">楽曲動画・MV・音作りの記録</div>
+        <div class="cta">Watch</div>
+      </a>
+
+      <a href="https://soundcloud.com/tokio-813067999" target="_blank" rel="noopener" class="asr-channel">
+        <div class="platform">SoundCloud</div>
+        <div class="name">Tokio / Minto</div>
+        <div class="name-jp">楽曲・デモ音源の置き場</div>
+        <div class="cta">Listen</div>
+      </a>
+
+      <a href="https://kuruwasu.booth.pm/" target="_blank" rel="noopener" class="asr-channel">
+        <div class="platform">Booth · Vocaloid</div>
+        <div class="name">Kuruwasu / 狂忘</div>
+        <div class="name-jp">ボカロ名義の楽曲データ販売</div>
+        <div class="cta">Shop</div>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="asr-contact">
+      <p>
+        コラボレーション・楽曲制作のご依頼は<br>
+        <a href="../../about/#contact">Contact</a> までお気軽にどうぞ。
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="asr-footer">
+  <div class="asr-footer-inner">
+    <div class="brand">ASR // Anomaly Sound Record</div>
+    <div class="links">
+      <a href="../">Music Room</a>
+      <a href="../../">Home</a>
+      <a href="../../about/#contact">Contact</a>
+    </div>
+    <div class="meta">© Minto Tsukino · 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

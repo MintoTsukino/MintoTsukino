@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>みんとの遊戯室 — 月ノみんとのフリーゲームとツクールプラグイン</title>
+<meta name="description" content="月ノみんとの遊戯室。フリーゲーム作品、ツクールMZ用プラグインの置き場。">
+<meta property="og:title" content="みんとの遊戯室 — Game Room">
+<meta property="og:description" content="月ノみんとのフリゲ、ツクールプラグインなど、ゲームまわりのおしごと。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mintotsukino.github.io/MintoTsukino/yugishitsu/">
+<meta property="og:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-jp-serif: "Noto Serif JP", "Yu Mincho", "游明朝", serif;
+    --font-jp-sans: "Noto Sans JP", "Yu Gothic", "游ゴシック", sans-serif;
+    --font-en: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-jp-sans);
+    line-height: 1.75;
+    font-size: 16px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .yugi-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 40px 0 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--lite-line);
+  }
+  .yugi-section-head h2 {
+    font-family: var(--font-jp-serif);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .yugi-section-head .en {
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--lite-accent-deep);
+    margin-left: auto;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ゲーム棚 */
+  .game-shelf {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+
+  .game-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--lite-bg-card);
+    border: 1px solid var(--lite-line);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--lite-fg);
+    box-shadow: var(--lite-shadow);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+
+  .game-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--lite-accent);
+    box-shadow: var(--lite-shadow-lift);
+  }
+
+  .game-cover {
+    width: 100%;
+    aspect-ratio: 63 / 50;
+    object-fit: cover;
+    display: block;
+    background: var(--lite-bg);
+    border-bottom: 1px solid var(--lite-line);
+  }
+
+  .game-info {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+  }
+
+  .game-title {
+    font-family: var(--font-jp-serif);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  .game-catch {
+    font-size: 11.5px;
+    color: var(--lite-fg-soft);
+    line-height: 1.75;
+    margin-top: 4px;
+    flex-grow: 1;
+  }
+
+  .game-meta {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--lite-accent-deep);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .game-meta .price {
+    color: var(--lite-fg-mute);
+    font-weight: 600;
+  }
+
+  /* 折りたたみ（CSSのみ） */
+  #show-more-games { position: absolute; opacity: 0; pointer-events: none; }
+  .game-card.extra-games { display: none; }
+  #show-more-games:checked ~ .game-shelf .game-card.extra-games {
+    display: flex;
+  }
+  #show-more-games:checked ~ .shelf-toggle .show-text { display: none; }
+  #show-more-games:checked ~ .shelf-toggle .hide-text { display: inline; }
+
+  .shelf-toggle {
+    display: flex;
+    justify-content: center;
+    margin: 18px 0 36px;
+  }
+
+  .shelf-toggle label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 100px;
+    background: var(--lite-bg-card);
+    border: 1px solid var(--lite-accent);
+    color: var(--lite-accent-deep);
+    font-family: var(--font-jp-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+  }
+
+  .shelf-toggle label:hover {
+    background: var(--lite-accent);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .shelf-toggle .hide-text { display: none; }
+</style>
+<link rel="stylesheet" href="../assets/css/lite-room.css">
+</head>
+<body class="theme-lite theme-yugishitsu">
+
+<header class="lite-header">
+  <div class="lite-inner">
+    <a href="./" class="lite-brand">
+      <span class="mark">🎮</span>
+      <div>
+        <div class="name">みんとの遊戯室</div>
+        <div class="en">MINTO TSUKINO &middot; GAME ROOM</div>
+      </div>
+    </a>
+    <nav class="lite-nav">
+      <a href="../">玄関</a>
+      <a href="./">遊戯室</a>
+      <a href="../koubou/">工房</a>
+      <a href="../shosai/">書斎</a>
+      <a href="../about/#contact">連絡先</a>
+    </nav>
+  </div>
+</header>
+
+<main class="lite-main">
+
+  <section class="lite-hero">
+    <div class="eyebrow">Game Room &middot; Free Games &amp; Plugins</div>
+    <h1>みんとの<span class="accent">遊戯室</span>。</h1>
+    <p>
+      ぼちぼち作ってきたゲーム作品、<br>
+      RPGツクール用のプラグイン置き場です。<br>
+      完成したゲームは <strong>18本以上</strong>、ブラウザで遊べる作品も多数。
+    </p>
+  </section>
+
+  <div class="yugi-section-head">
+    <h2>作品棚</h2>
+    <span class="en">Game Shelf</span>
+  </div>
+
+  <input type="checkbox" id="show-more-games">
+
+  <div class="game-shelf">
+
+    <a href="https://mintotsukino.itch.io/writerclicker" target="_blank" rel="noopener" class="game-card">
+      <img src="../assets/img/games/writerclicker.png" alt="執筆クリッカー" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">執筆クリッカー Writer Clicker</div>
+        <p class="game-catch">ひたすらクリックして文字を書き、出版して、才能を磨いていく放置系執筆シミュレーター。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/novelsimulator" target="_blank" rel="noopener" class="game-card">
+      <img src="../assets/img/games/novelsimulator.png" alt="web小説家シミュレーター" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">web小説家シミュレーター</div>
+        <p class="game-catch">新人作家として、1年間で小説ランキング1位を目指す経営型シミュレーション。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/dtmersssss" target="_blank" rel="noopener" class="game-card">
+      <img src="../assets/img/games/composer.png" alt="作曲家になろう！" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">作曲家になろう！</div>
+        <p class="game-catch">駆け出しの作曲家となり、音楽業界のトップを目指すカイロソフト風シミュレーション。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Pay what you want</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/dtmersimulation" target="_blank" rel="noopener" class="game-card">
+      <img src="../assets/img/games/dtmsim.png" alt="DTM Simulator" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">DTM Simulator</div>
+        <p class="game-catch">ベッドルームスタジオからスターダムまで。音楽キャリアを築き上げよう。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/nekocafeee" target="_blank" rel="noopener" class="game-card">
+      <img src="../assets/img/games/nekocafe.png" alt="ちょむ猫カフェ" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">ちょむ猫カフェ</div>
+        <p class="game-catch">のんびり猫カフェシミュレーション。5匹のねこたちが暮らすカフェの環境を整えよう。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/bookstoremati" target="_blank" rel="noopener" class="game-card">
+      <img src="../assets/img/games/bookstore.png" alt="まちの本屋さん" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">まちの本屋さん</div>
+        <p class="game-catch">小さな町で本屋を経営。レジ打ち、仕入れ管理、店舗拡張を楽しむシミュレーション。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/snssim" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/snssim.png" alt="SNS発展国" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">SNS発展国 〜100万人を目指せ〜</div>
+        <p class="game-catch">カードを組み合わせて投稿を作り、フォロワー100万人達成を目指すSNS運営シミュレーション。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Pay what you want</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/slimetyan" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/slimetyan.png" alt="スライムちゃん育成ゲーム" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">スライムちゃん育成ゲーム</div>
+        <p class="game-catch">スライムちゃんを育てよう！シンプルかつ可愛い育成シミュレーション。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Pay what you want</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/aposhel" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/aposhel.png" alt="アポカリプスシェルター" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">アポカリプスシェルター</div>
+        <p class="game-catch">核戦争で汚染された世界。地下シェルターの3人の生存者を率いて、1日でも長く生き延びろ。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/blackmarketsimulator" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/blackmarket.png" alt="Black Market Simulator" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">Black Market Simulator</div>
+        <p class="game-catch">闇の市場で商人となり、日々の経営を通じてサバイバルする経営シミュレーター。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Pay what you want</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/mineminemine" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/mineminemine.png" alt="Mine×Mine×Mine" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">Mine×Mine×Mine</div>
+        <p class="game-catch">掘れ！！！シンプルで中毒性のある採掘シミュレーション。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://mintotsukino.itch.io/hegemonyyyyy" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/hegemony.png" alt="HEGEMONY 覇権をとれ！" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">HEGEMONY 覇権をとれ！</div>
+        <p class="game-catch">覇権を取りに行く、戦略シミュレーション。</p>
+        <div class="game-meta"><span>Browser</span><span class="price">Pay what you want</span></div>
+      </div>
+    </a>
+
+    <a href="https://www.freem.ne.jp/win/game/34272" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/mugen-dungeon-zero.jpg" alt="無限のダンジョン～零～" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">無限のダンジョン 〜零〜</div>
+        <p class="game-catch">ダンジョンは無限、ドロップも無限、生還率は零。約10万種類の武器防具が登場するハクスラRPG。</p>
+        <div class="game-meta"><span>Windows</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://www.freem.ne.jp/win/game/30914" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/mugen-dungeon.jpg" alt="無限のダンジョン" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">無限のダンジョン</div>
+        <p class="game-catch">職業26種、アイテム300種、武器防具600種。物量で殴る、やりこみ系ハクスラRPG。</p>
+        <div class="game-meta"><span>Windows</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://www.freem.ne.jp/win/game/20576" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/naraku-meikyu.jpg" alt="奈落迷宮の絶対支配" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">奈落迷宮の絶対支配（パーフェクトオーダー）</div>
+        <p class="game-catch">行方不明の妹を追って迷宮に挑むハクスラRPG。開発一週間で生まれた高難度ダンジョン作品。</p>
+        <div class="game-meta"><span>Windows</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://freegame-mugen.jp/simulation/game_14579.html" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/shadow-contract.png" alt="Shadow Contract: Black Grid" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">Shadow Contract : Black Grid</div>
+        <p class="game-catch">情報と判断だけで生き残る、硬派なミリタリーSRPG。一手の重みが命運を分ける。</p>
+        <div class="game-meta"><span>Windows</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://freegame-mugen.jp/roleplaying/game_14630.html" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/atomic-anomalies.png" alt="Atomic Anomalies: Infinite Abyss" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">Atomic Anomalies : Infinite Abyss</div>
+        <p class="game-catch">崩壊企業の深淵に潜れ。レトロCRT風画面のローグライクRPG。</p>
+        <div class="game-meta"><span>Windows</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+    <a href="https://freegame-mugen.jp/simulation/game_14546.html" target="_blank" rel="noopener" class="game-card extra-games">
+      <img src="../assets/img/games/tenbai-oukoku.png" alt="転売王国" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <div class="game-title">転売王国</div>
+        <p class="game-catch">ランダム生成される商品を仕入れて売る、プレイヤーの判断がすべての転売シミュレーション。</p>
+        <div class="game-meta"><span>Windows</span><span class="price">Free</span></div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="shelf-toggle">
+    <label for="show-more-games">
+      <span class="show-text">▼ 他の12本も見る</span>
+      <span class="hide-text">▲ 閉じる</span>
+    </label>
+  </div>
+
+  <div class="yugi-section-head">
+    <h2>ゲームの公開先</h2>
+    <span class="en">Games</span>
+  </div>
+
+  <div class="lite-links">
+
+    <a href="https://mintotsukino.itch.io/" target="_blank" rel="noopener" class="lite-link">
+      <span class="lite-link-icon">🎮</span>
+      <div class="lite-link-body">
+        <div class="lite-link-en">itch.io &middot; Browser Playable</div>
+        <div class="lite-link-name">MintoTsukino on itch.io</div>
+        <p class="lite-link-desc">シミュレーション系ゲームを中心に <strong>12本以上</strong> 公開中。スライムちゃん育成、執筆クリッカー、web小説家シミュレーター、Black Market Simulator など、その多くが <strong>ブラウザで即プレイ可能</strong>。素材パックや RPGツクール用プラグインも配布。</p>
+      </div>
+      <span class="lite-link-arrow">PLAY →</span>
+    </a>
+
+    <a href="https://www.freem.ne.jp/brand/9698" target="_blank" rel="noopener" class="lite-link">
+      <span class="lite-link-icon">🕹️</span>
+      <div class="lite-link-body">
+        <div class="lite-link-en">Freem!</div>
+        <div class="lite-link-name">月ノみんと（フリーム）</div>
+        <p class="lite-link-desc">フリームに登録している作品ブランドページ。公開しているフリーゲーム一覧はこちらで。</p>
+      </div>
+      <span class="lite-link-arrow">VIEW →</span>
+    </a>
+
+    <a href="https://freegame-mugen.jp/cms/mt-cp.cgi?__mode=view&blog_id=1&id=12247" target="_blank" rel="noopener" class="lite-link">
+      <span class="lite-link-icon">🎲</span>
+      <div class="lite-link-body">
+        <div class="lite-link-en">Free Game Mugen</div>
+        <div class="lite-link-name">フリーゲーム夢現の作品ページ</div>
+        <p class="lite-link-desc">フリーゲーム夢現に掲載している作品。レビューもこちらで読めます。</p>
+      </div>
+      <span class="lite-link-arrow">VIEW →</span>
+    </a>
+
+  </div>
+
+  <div class="yugi-section-head">
+    <h2>ツクール用プラグイン</h2>
+    <span class="en">RPG Maker Plugins</span>
+  </div>
+
+  <div class="lite-links">
+
+    <a href="../koubou/rpgmaker-plugins/" class="lite-link">
+      <span class="lite-link-icon">🧩</span>
+      <div class="lite-link-body">
+        <div class="lite-link-en">RPG Maker MZ · 5 Plugins</div>
+        <div class="lite-link-name">RPGツクールMZ用プラグイン集</div>
+        <p class="lite-link-desc">MintoSoft制作のRPGツクールMZ用プラグイン5本（Engine Core、Performance Optimizer、Shader Suite、More Simply Light、Simple Return Spell）。詳細は工房のページで。</p>
+      </div>
+      <span class="lite-link-arrow">OPEN →</span>
+    </a>
+
+  </div>
+
+  <div class="lite-note">
+    🎮 ゲーム制作は <strong>長く続けてきたライフワーク</strong> のひとつです。<br>
+    フリーゲーム、ツクールプラグイン、ゲームまわりの依頼などもお気軽にどうぞ。<br>
+    お仕事のご依頼は <a href="../about/#contact" style="color: var(--lite-accent-deep); font-weight: 700;">連絡先</a> まで。
+  </div>
+
+</main>
+
+<footer class="lite-footer">
+  <div class="lite-footer-inner">
+    <div class="brand">🎮 みんとの遊戯室</div>
+    <div class="links">
+      <a href="../">玄関</a>
+      <a href="../koubou/">工房</a>
+      <a href="../shosai/">書斎</a>
+      <a href="../about/#contact">連絡先</a>
+    </div>
+    <div class="meta">© Minto Tsukino · 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

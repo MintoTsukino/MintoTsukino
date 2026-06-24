@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>RPGツクールMZ用プラグイン — みんとの工房</title>
+<meta name="description" content="MintoSoft（月ノみんと）が制作・配布しているRPGツクールMZ用プラグイン一覧。エンジン最適化、ライト演出、ポストエフェクト、便利機能など。すべて無料。">
+<meta property="og:title" content="RPGツクールMZ用プラグイン — みんとの工房">
+<meta property="og:description" content="MintoSoftが配布しているRPGツクールMZ用プラグイン。エンジン強化・演出・便利系を中心に5本展開中。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mintotsukino.github.io/MintoTsukino/koubou/rpgmaker-plugins/">
+<meta property="og:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RPGツクールMZ用プラグイン — みんとの工房">
+<meta name="twitter:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-jp-serif: "Noto Serif JP", "Yu Mincho", "游明朝", serif;
+    --font-jp-sans: "Noto Sans JP", "Yu Gothic", "游ゴシック", sans-serif;
+    --font-en: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-jp-sans);
+    line-height: 1.75;
+    font-size: 16px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* プラグイングリッド */
+  .plugin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    margin-bottom: 56px;
+  }
+
+  .plugin-card {
+    background: var(--lite-bg-card);
+    border: 1px solid var(--lite-line);
+    border-radius: 16px;
+    padding: 26px 26px 22px;
+    text-decoration: none;
+    color: var(--lite-fg);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--lite-shadow);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .plugin-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lite-accent), var(--lite-accent-deep));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .plugin-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--lite-accent);
+    box-shadow: var(--lite-shadow-lift);
+  }
+
+  .plugin-card:hover::before { opacity: 1; }
+
+  .plugin-card .icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: var(--lite-accent-bg);
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .plugin-card .ver {
+    display: inline-block;
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--lite-accent-deep);
+    background: var(--lite-accent-bg);
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    align-self: flex-start;
+  }
+
+  .plugin-card h3 {
+    font-family: var(--font-jp-serif);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .plugin-card .en {
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--lite-accent-deep);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .plugin-card .desc {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--lite-fg-soft);
+    flex-grow: 1;
+    margin-bottom: 16px;
+  }
+
+  .plugin-card .arrow {
+    font-family: var(--font-en);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--lite-accent-deep);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* 利用規約ブロック */
+  .terms {
+    background: var(--lite-bg-card);
+    border: 1px solid var(--lite-line);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+
+  .terms h3 {
+    font-family: var(--font-jp-serif);
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    letter-spacing: 0.04em;
+  }
+
+  .terms ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .terms li {
+    padding: 8px 0 8px 22px;
+    position: relative;
+    font-size: 13.5px;
+    color: var(--lite-fg-soft);
+    line-height: 1.85;
+  }
+
+  .terms li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--lite-accent-deep);
+    font-weight: 700;
+  }
+
+  .terms code {
+    font-family: "Consolas", monospace;
+    font-size: 12px;
+    background: var(--lite-accent-bg);
+    color: var(--lite-accent-deep);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .section-h {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 40px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--lite-line);
+  }
+  .section-h h2 {
+    font-family: var(--font-jp-serif);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .section-h .en {
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--lite-accent-deep);
+    margin-left: auto;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+</style>
+<link rel="stylesheet" href="../../assets/css/lite-room.css">
+</head>
+<body class="theme-lite theme-koubou">
+
+<header class="lite-header">
+  <div class="lite-inner">
+    <a href="../" class="lite-brand">
+      <span class="mark">🛠️</span>
+      <div>
+        <div class="name">みんとの工房</div>
+        <div class="en">MINTO TSUKINO &middot; WORKSHOP</div>
+      </div>
+    </a>
+    <nav class="lite-nav">
+      <a href="../../">玄関</a>
+      <a href="../">工房</a>
+      <a href="../../yugishitsu/">遊戯室</a>
+      <a href="../../shokudo/">食堂</a>
+      <a href="../../about/#contact">連絡先</a>
+    </nav>
+  </div>
+</header>
+
+<main class="lite-main">
+
+  <section class="lite-hero">
+    <div class="eyebrow">RPG Maker MZ Plugins</div>
+    <h1>RPGツクールMZ用<span class="accent">プラグイン</span>。</h1>
+    <p>
+      MintoSoft（月ノみんと）が制作・配布している<br>
+      RPGツクールMZ用プラグイン一覧です。<br>
+      エンジン強化、ライト演出、ポストエフェクト、便利機能など。
+    </p>
+  </section>
+
+  <div class="section-h">
+    <h2>プラグイン一覧</h2>
+    <span class="en">All Plugins</span>
+  </div>
+
+  <div class="plugin-grid">
+
+    <a href="https://github.com/MintoTsukino/MintoEngineCore_MEC" target="_blank" rel="noopener" class="plugin-card">
+      <div class="icon">⚙️</div>
+      <span class="ver">v1.0 &middot; CORE</span>
+      <h3>Minto Engine Core</h3>
+      <div class="en">MEC &middot; Foundation</div>
+      <p class="desc">他プラグインが安全に動作するための共通基盤フレームワーク。コアランタイム、APIバス、スクリプトキャッシュ、安全な非同期マップローダー、メモリパージ＆FPS安定化を含む。</p>
+      <span class="arrow">GitHub →</span>
+    </a>
+
+    <a href="https://github.com/MintoTsukino/MintoPerformanceOptimizer" target="_blank" rel="noopener" class="plugin-card">
+      <div class="icon">⚡</div>
+      <span class="ver">v1.9 &middot; MPO</span>
+      <h3>Minto Performance Optimizer</h3>
+      <div class="en">MPO &middot; Optimization Layer</div>
+      <p class="desc">RPGツクールMZ向けの最適化レイヤ。マップや戦闘終了時のキャッシュ自動整理、FPS制御、安全なGCで安定動作を維持。MECなしでも単独で動作。</p>
+      <span class="arrow">GitHub →</span>
+    </a>
+
+    <a href="https://github.com/MintoTsukino/MintoShaderSuite" target="_blank" rel="noopener" class="plugin-card">
+      <div class="icon">🌫️</div>
+      <span class="ver">v0.3 &middot; STABLE</span>
+      <h3>Minto Shader Suite</h3>
+      <div class="en">Post Effects</div>
+      <p class="desc">軽量ポストエフェクト3点セット。Bloom（柔らかい光のぼかし）、Vignette（周辺減光）、Fog（動く霧）。テクスチャ画像差し替えで色味も自由調整可能。</p>
+      <span class="arrow">GitHub →</span>
+    </a>
+
+    <a href="https://github.com/MintoTsukino/MintoMoreSimplyLight" target="_blank" rel="noopener" class="plugin-card">
+      <div class="icon">💡</div>
+      <span class="ver">LIGHTING</span>
+      <h3>Minto More Simply Light</h3>
+      <div class="en">Torch &amp; Lantern Light</div>
+      <p class="desc">たいまつとランタン専用の超軽量ライト演出。<code>&lt;torchlight radius:120 color:#ffaa66 flicker&gt;</code> を1行書くだけで、温かな揺らめく灯りがマップに灯ります。</p>
+      <span class="arrow">GitHub →</span>
+    </a>
+
+    <a href="https://github.com/MintoTsukino/SimpleReturnSpell" target="_blank" rel="noopener" class="plugin-card">
+      <div class="icon">🔮</div>
+      <span class="ver">UTILITY</span>
+      <h3>Simple Return Spell</h3>
+      <div class="en">Warp Magic</div>
+      <p class="desc">拠点へ即帰還するための軽量ワープ魔法プラグイン。シンプルな実装で、町や拠点への移動を簡単に組み込めます。</p>
+      <span class="arrow">GitHub →</span>
+    </a>
+
+  </div>
+
+  <div class="section-h">
+    <h2>利用について</h2>
+    <span class="en">Terms of Use</span>
+  </div>
+
+  <div class="terms">
+    <h3>📝 利用規約（共通）</h3>
+    <ul>
+      <li>クレジット表記をお願いします（<code>MintoSoft</code> または <code>月ノみんと</code>）</li>
+      <li>改変・改造は自由に行って構いません</li>
+      <li>商用利用OK（告知いただけると嬉しいです）</li>
+      <li>誹謗中傷を目的とした使用は禁止</li>
+      <li>プラグイン本体の有料転売・再配布は禁止</li>
+      <li>本プラグインの利用によって生じた損害について、開発者は責任を負いません</li>
+    </ul>
+    <p style="margin-top: 16px; font-size: 12.5px; color: var(--lite-fg-mute); line-height: 1.85;">
+      完成したゲームを公開された際は、お知らせいただけると嬉しいです。可能な範囲で宣伝のお手伝いをします。
+    </p>
+  </div>
+
+  <div class="lite-note">
+    🧩 すべて <strong>RPGツクールMZ</strong> 用プラグインです。<br>
+    各リポジトリのリリースタグからダウンロードしてご利用ください。<br>
+    お仕事のご依頼・カスタムプラグインのご相談は <a href="../../about/#contact" style="color: var(--lite-accent-deep); font-weight: 700;">連絡先</a> まで。
+  </div>
+
+</main>
+
+<footer class="lite-footer">
+  <div class="lite-footer-inner">
+    <div class="brand">🛠️ みんとの工房</div>
+    <div class="links">
+      <a href="../">工房に戻る</a>
+      <a href="../../">玄関</a>
+      <a href="../../yugishitsu/">遊戯室</a>
+      <a href="../../about/#contact">連絡先</a>
+    </div>
+    <div class="meta">© Minto Tsukino · 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>ノベルストーン NovelStone — 月ノみんとの執筆アプリ</title>
+<meta name="description" content="書くほどレベルが上がる。物語を紡ぐ冒険が、ここから始まる。月ノみんとが開発したWindows用の執筆アプリ NovelStone（ノベルストーン）。Steam・BOOTHで配布中。">
+<meta property="og:title" content="ノベルストーン NovelStone — 月ノみんとの執筆アプリ">
+<meta property="og:description" content="書くほどレベルが上がる。物語を紡ぐ冒険が、ここから始まる。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mintotsukino.github.io/MintoTsukino/koubou/novelstone/">
+<meta property="og:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ノベルストーン NovelStone">
+<meta name="twitter:description" content="書くほどレベルが上がる。物語を紡ぐ冒険が、ここから始まる。">
+<meta name="twitter:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --font-jp-serif: "Noto Serif JP", "Yu Mincho", "游明朝", serif;
+    --font-jp-sans: "Noto Sans JP", "Yu Gothic", "游ゴシック", sans-serif;
+    --font-en: "Inter", "Helvetica Neue", system-ui, sans-serif;
+
+    --ns-bg: #1a140f;
+    --ns-bg-2: #221a13;
+    --ns-bg-3: #2d231a;
+    --ns-card: #251c14;
+    --ns-fg: #f3e9d2;
+    --ns-fg-soft: rgba(243, 233, 210, 0.74);
+    --ns-fg-mute: rgba(243, 233, 210, 0.48);
+    --ns-gold: #d4a657;
+    --ns-gold-soft: #e6c07d;
+    --ns-amber: #c9892e;
+    --ns-rust: #a86530;
+    --ns-line: rgba(243, 233, 210, 0.1);
+    --ns-line-strong: rgba(243, 233, 210, 0.22);
+    --ns-gold-line: rgba(212, 166, 87, 0.32);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ns-bg);
+    color: var(--ns-fg);
+    font-family: var(--font-jp-sans);
+    line-height: 1.75;
+    font-size: 16px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 0%, rgba(212, 166, 87, 0.1), transparent 50%),
+      radial-gradient(ellipse at 0% 100%, rgba(168, 101, 48, 0.07), transparent 55%),
+      linear-gradient(180deg, var(--ns-bg) 0%, var(--ns-bg-2) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 28vh;
+    background:
+      linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent),
+      repeating-linear-gradient(90deg,
+        transparent 0px,
+        transparent 32px,
+        rgba(212, 166, 87, 0.04) 32px,
+        rgba(212, 166, 87, 0.04) 34px,
+        transparent 34px,
+        transparent 70px,
+        rgba(168, 101, 48, 0.04) 70px,
+        rgba(168, 101, 48, 0.04) 72px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ヘッダー */
+
+  .ns-header {
+    position: relative;
+    z-index: 1;
+    padding: 32px 0 0;
+  }
+
+  .ns-header::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent,
+      var(--ns-gold-line) 20%,
+      var(--ns-gold) 50%,
+      var(--ns-gold-line) 80%,
+      transparent);
+  }
+
+  .ns-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 32px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .ns-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--ns-fg);
+  }
+
+  .ns-brand .mark {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--ns-gold-line);
+    background: linear-gradient(135deg, var(--ns-bg-3), var(--ns-bg-2));
+    font-size: 18px;
+  }
+
+  .ns-brand .name {
+    font-family: var(--font-jp-serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+
+  .ns-brand .en {
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--ns-gold);
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .ns-nav {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+  }
+
+  .ns-nav a {
+    color: var(--ns-fg);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    opacity: 0.78;
+    transition: opacity 0.25s, color 0.25s;
+    padding: 4px 2px;
+  }
+
+  .ns-nav a:hover {
+    opacity: 1;
+    color: var(--ns-gold);
+  }
+
+  /* メイン */
+
+  .ns-main {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 64px 32px 96px;
+  }
+
+  /* ヒーロー */
+
+  .ns-hero {
+    text-align: center;
+    margin-bottom: 64px;
+    padding: 24px 16px;
+  }
+
+  .ns-hero .badge {
+    display: inline-block;
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--ns-bg);
+    background: var(--ns-gold);
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .ns-hero h1 {
+    font-family: var(--font-jp-serif);
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .ns-hero .subtitle {
+    font-family: var(--font-en);
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--ns-gold);
+    margin-bottom: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .ns-hero .catch {
+    font-family: var(--font-jp-serif);
+    font-size: clamp(17px, 2.2vw, 22px);
+    line-height: 1.95;
+    color: var(--ns-fg);
+    max-width: 640px;
+    margin: 0 auto 32px;
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  .ns-hero .catch::before,
+  .ns-hero .catch::after {
+    color: var(--ns-gold);
+    font-weight: 700;
+    margin: 0 6px;
+  }
+
+  .ns-hero .catch::before { content: "❝"; }
+  .ns-hero .catch::after  { content: "❞"; }
+
+  .ns-hero .meta {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  .ns-hero .meta span {
+    font-family: var(--font-en);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    padding: 6px 14px;
+    border: 1px solid var(--ns-line);
+    border-radius: 100px;
+    color: var(--ns-fg-soft);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* セクション見出し */
+
+  .ns-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--ns-line);
+  }
+
+  .ns-section-head h2 {
+    font-family: var(--font-jp-serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .ns-section-head .en {
+    font-family: var(--font-en);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--ns-gold);
+    margin-left: auto;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* 入手先カード（3つ並べる） */
+
+  .ns-grab {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-bottom: 64px;
+  }
+
+  .ns-grab-card {
+    background:
+      linear-gradient(180deg, rgba(212, 166, 87, 0.05), transparent 40%),
+      var(--ns-card);
+    border: 1px solid var(--ns-line);
+    border-radius: 12px;
+    padding: 28px 26px;
+    text-decoration: none;
+    color: var(--ns-fg);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ns-grab-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--ns-gold), var(--ns-amber));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .ns-grab-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--ns-gold-line);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4),
+                0 0 28px rgba(212, 166, 87, 0.1);
+  }
+
+  .ns-grab-card:hover::before { opacity: 1; }
+
+  .ns-grab-card .platform {
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--ns-gold);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .ns-grab-card .name {
+    font-family: var(--font-jp-serif);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .ns-grab-card .price {
+    font-family: var(--font-en);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ns-gold-soft);
+    margin: 8px 0 12px;
+  }
+
+  .ns-grab-card .desc {
+    font-size: 13px;
+    color: var(--ns-fg-soft);
+    line-height: 1.85;
+    flex-grow: 1;
+  }
+
+  .ns-grab-card .cta {
+    margin-top: 14px;
+    font-family: var(--font-en);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--ns-gold);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .ns-grab-card.recommended {
+    border-color: var(--ns-gold-line);
+    background:
+      linear-gradient(180deg, rgba(212, 166, 87, 0.1), transparent 40%),
+      var(--ns-card);
+  }
+
+  .ns-grab-card.recommended::after {
+    content: "★ Recommended";
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: var(--font-en);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--ns-gold);
+    background: rgba(212, 166, 87, 0.14);
+    border: 1px solid var(--ns-gold-line);
+    border-radius: 100px;
+    padding: 3px 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* 機能グリッド */
+
+  .ns-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+
+  .ns-feature {
+    background: var(--ns-card);
+    border: 1px solid var(--ns-line);
+    border-radius: 8px;
+    padding: 22px 22px;
+    transition: border-color 0.3s;
+  }
+
+  .ns-feature:hover {
+    border-color: var(--ns-gold-line);
+  }
+
+  .ns-feature-icon {
+    display: inline-block;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .ns-feature h3 {
+    font-family: var(--font-jp-serif);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .ns-feature p {
+    font-size: 12.5px;
+    color: var(--ns-fg-soft);
+    line-height: 1.85;
+  }
+
+  /* コンセプトブロック */
+
+  .ns-concept {
+    background:
+      linear-gradient(180deg, rgba(212, 166, 87, 0.06), transparent 50%),
+      var(--ns-card);
+    border: 1px solid var(--ns-line);
+    border-left: 3px solid var(--ns-gold);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+
+  .ns-concept h3 {
+    font-family: var(--font-jp-serif);
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--ns-gold-soft);
+    letter-spacing: 0.06em;
+  }
+
+  .ns-concept p {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ns-fg-soft);
+  }
+
+  .ns-concept p + p {
+    margin-top: 12px;
+  }
+
+  /* 動作環境 */
+
+  .ns-specs {
+    background: var(--ns-card);
+    border: 1px solid var(--ns-line);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+
+  .ns-specs h3 {
+    font-family: var(--font-jp-serif);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .ns-specs ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .ns-specs li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 13px;
+    color: var(--ns-fg-soft);
+    line-height: 1.85;
+  }
+
+  .ns-specs li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--ns-gold);
+  }
+
+  /* フッター */
+
+  .ns-footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--ns-line);
+    padding: 32px;
+    margin-top: 32px;
+  }
+
+  .ns-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .ns-footer .brand {
+    font-family: var(--font-jp-serif);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--ns-fg-soft);
+    font-weight: 700;
+  }
+
+  .ns-footer .links {
+    display: flex;
+    gap: 18px;
+    font-size: 12px;
+  }
+
+  .ns-footer .links a {
+    color: var(--ns-fg-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .ns-footer .links a:hover {
+    color: var(--ns-gold);
+  }
+
+  .ns-footer .meta {
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ns-fg-mute);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .ns-inner {
+      flex-direction: column;
+      text-align: center;
+      padding: 12px 20px 28px;
+    }
+    .ns-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+    .ns-main {
+      padding: 48px 20px 64px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="ns-header">
+  <div class="ns-inner">
+    <a href="../" class="ns-brand">
+      <span class="mark">🛠️</span>
+      <div>
+        <div class="name">みんとの工房</div>
+        <div class="en">MINTO TSUKINO &middot; WORKSHOP</div>
+      </div>
+    </a>
+    <nav class="ns-nav">
+      <a href="../../">玄関</a>
+      <a href="../">工房</a>
+      <a href="../../shosai/">書斎</a>
+      <a href="../../shokudo/">食堂</a>
+      <a href="../../about/#contact">連絡先</a>
+    </nav>
+  </div>
+</header>
+
+<main class="ns-main">
+
+  <section class="ns-hero">
+    <div class="badge">Featured &middot; Writing App</div>
+    <h1>ノベルストーン</h1>
+    <div class="subtitle">NovelStone</div>
+    <p class="catch">書くほどレベルが上がる。<br>物語を紡ぐ冒険が、ここから始まる。</p>
+    <div class="meta">
+      <span>Windows 10 / 11 (64-bit)</span>
+      <span>Steam · BOOTH</span>
+      <span>Inst. 不要 ZIP配布</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="ns-section-head">
+      <h2>入手する</h2>
+      <span class="en">Get NovelStone</span>
+    </div>
+
+    <div class="ns-grab">
+
+      <a href="https://kuruwasu.booth.pm/items/7990026" target="_blank" rel="noopener" class="ns-grab-card recommended">
+        <div class="platform">BOOTH &middot; 無料版</div>
+        <div class="name">ノベルストーン</div>
+        <div class="price">¥0</div>
+        <p class="desc">まずは無料で全機能を試せます。ZIP（約271 MB）をダウンロードして展開、インストール不要で起動できます。</p>
+        <span class="cta">BOOTH で入手 →</span>
+      </a>
+
+      <a href="https://store.steampowered.com/app/4438180/NovelStone/" target="_blank" rel="noopener" class="ns-grab-card">
+        <div class="platform">Steam &middot; 正式版</div>
+        <div class="name">NovelStone (Steam)</div>
+        <div class="price">¥1,200</div>
+        <p class="desc">Steam Cloud対応の正式版。自動アップデートと、Steam ライブラリで管理できる利便性つき。</p>
+        <span class="cta">Steam で見る →</span>
+      </a>
+
+      <a href="https://kuruwasu.booth.pm/items/8004847" target="_blank" rel="noopener" class="ns-grab-card">
+        <div class="platform">BOOTH &middot; 投げ銭</div>
+        <div class="name">ノベルストーン 有料版</div>
+        <div class="price">¥1,000</div>
+        <p class="desc">中身は無料版と同じ。応援したい方向けの投げ銭用商品です。気持ちありがとうございます。</p>
+        <span class="cta">BOOTH で応援 →</span>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="ns-section-head">
+      <h2>主な機能</h2>
+      <span class="en">Features</span>
+    </div>
+
+    <div class="ns-features">
+      <div class="ns-feature">
+        <span class="ns-feature-icon">📝</span>
+        <h3>縦書き・横書き対応</h3>
+        <p>原稿用紙モードでは文字数・行数も自由に設定可能。日本語の執筆習慣にぴったり寄り添います。</p>
+      </div>
+      <div class="ns-feature">
+        <span class="ns-feature-icon">🎮</span>
+        <h3>レベルアップ・称号</h3>
+        <p>書いた文字数に応じて経験値が貯まり、レベルが上がります。称号システムで継続を後押し。</p>
+      </div>
+      <div class="ns-feature">
+        <span class="ns-feature-icon">🎵</span>
+        <h3>内蔵BGMプレイヤー</h3>
+        <p>雨音、暖炉音、Lo-fiビートなど、執筆に集中できる環境音を内蔵。アプリ内で完結。</p>
+      </div>
+      <div class="ns-feature">
+        <span class="ns-feature-icon">⏱️</span>
+        <h3>ポモドーロタイマー</h3>
+        <p>集中と休憩のリズムを管理。書く時間と離れる時間のメリハリで、長時間執筆を健康に。</p>
+      </div>
+      <div class="ns-feature">
+        <span class="ns-feature-icon">💾</span>
+        <h3>オートセーブ</h3>
+        <p>書いている間、自動的に保存されます。電源落ちや事故からあなたの原稿を守ります。</p>
+      </div>
+      <div class="ns-feature">
+        <span class="ns-feature-icon">⚡</span>
+        <h3>インストール不要</h3>
+        <p>ZIPを展開して実行ファイルを起動するだけ。レジストリも汚しません。持ち運びも自由。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="ns-section-head">
+      <h2>コンセプト</h2>
+      <span class="en">Concept</span>
+    </div>
+
+    <div class="ns-concept">
+      <h3>❝ 執筆を、ひとつの冒険として ❞</h3>
+      <p>
+        執筆は、ときに孤独で、ときに長丁場です。<br>
+        言葉と向き合い続ける時間に、もう少し<strong>「楽しさ」</strong>を加えたい。
+      </p>
+      <p>
+        NovelStone は、<strong>ダークアカデミア</strong>のような落ち着いた書斎の雰囲気に、<br>
+        <strong>ゲームの没入感</strong>を持ち込んだ執筆アプリです。
+      </p>
+      <p>
+        書くほどに経験値が貯まり、レベルが上がり、称号が手に入る。<br>
+        小さな達成感が、毎日の執筆習慣をそっと支えてくれます。
+      </p>
+      <p>
+        作家としての自分の経験から、<br>
+        <strong>「書く時間そのものを心地よくする道具」</strong>を作りたかった ── それがこのアプリです。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="ns-section-head">
+      <h2>動作環境</h2>
+      <span class="en">System</span>
+    </div>
+
+    <div class="ns-specs">
+      <h3>必要環境</h3>
+      <ul>
+        <li>Windows 10 / 11（64-bit）</li>
+        <li>ZIP展開後、約 271 MB の空き容量</li>
+        <li>インストール不要 — 任意のフォルダに展開して実行</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ns-footer">
+  <div class="ns-footer-inner">
+    <div class="brand">🛠️ みんとの工房</div>
+    <div class="links">
+      <a href="../">工房に戻る</a>
+      <a href="../../">玄関</a>
+      <a href="../../about/#contact">連絡先</a>
+    </div>
+    <div class="meta">© Minto Tsukino · 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

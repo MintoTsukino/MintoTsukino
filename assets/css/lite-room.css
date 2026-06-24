@@ -1,0 +1,419 @@
+/* ============================================
+   軽め部屋（売店・書き物机・配信小屋）共通テーマ
+   玄関と統一したミントベース、部屋ごとにアクセント色だけ変える
+   ============================================ */
+
+:root { color-scheme: light only; }
+
+.theme-lite {
+  --lite-bg: #eef5f0;
+  --lite-bg-card: #ffffff;
+  --lite-fg: #1e3026;
+  --lite-fg-soft: rgba(30, 48, 38, 0.72);
+  --lite-fg-mute: rgba(30, 48, 38, 0.5);
+  --lite-mint: #5fdcb9;
+  --lite-mint-deep: #2db991;
+  --lite-mint-bg: #ecfaf3;
+  --lite-line: rgba(30, 48, 38, 0.08);
+  --lite-shadow: 0 6px 18px rgba(45, 185, 145, 0.1);
+  --lite-shadow-lift: 0 18px 42px rgba(45, 185, 145, 0.22);
+
+  /* 部屋ごとに上書きするアクセント */
+  --lite-accent: var(--lite-mint);
+  --lite-accent-deep: var(--lite-mint-deep);
+  --lite-accent-bg: var(--lite-mint-bg);
+}
+
+/* 売店：ピンク・桃色（賑やかなショップ感） */
+.theme-baiten {
+  --lite-accent: #ff8aa8;
+  --lite-accent-deep: #d8527a;
+  --lite-accent-bg: #ffeef3;
+}
+
+/* 書き物机：紙のような薄黄＋青味（note風） */
+.theme-tsukue {
+  --lite-accent: #6cb9e6;
+  --lite-accent-deep: #2980b9;
+  --lite-accent-bg: #e8f3fb;
+}
+
+/* 配信小屋：温かいオレンジ（配信のスポットライト感） */
+.theme-koya {
+  --lite-accent: #ff9c5c;
+  --lite-accent-deep: #d9622d;
+  --lite-accent-bg: #fff0e3;
+}
+
+/* 音楽室：紫（音の波・楽器の色） */
+.theme-ongaku {
+  --lite-accent: #b793e6;
+  --lite-accent-deep: #7a52c4;
+  --lite-accent-bg: #f1eafa;
+}
+
+/* 画室：山吹色（絵筆と画材の温かさ） */
+.theme-gashitsu {
+  --lite-accent: #f5c45b;
+  --lite-accent-deep: #c98712;
+  --lite-accent-bg: #fcf3dc;
+}
+
+/* 工房：銅＋ダークウッド（鍛冶場・木工房感） */
+.theme-koubou {
+  --lite-accent: #d68f5a;
+  --lite-accent-deep: #8b4c1f;
+  --lite-accent-bg: #f7ecdf;
+}
+
+/* 遊戯室：マゼンタ＋紫（レトロゲーム機・コントローラー感） */
+.theme-yugishitsu {
+  --lite-accent: #e070bb;
+  --lite-accent-deep: #8e3a78;
+  --lite-accent-bg: #f9e7f2;
+}
+
+body.theme-lite {
+  background: var(--lite-bg);
+  color: var(--lite-fg);
+  font-family: var(--font-jp-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.theme-lite::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 90% 10%, var(--lite-accent-bg), transparent 55%),
+    radial-gradient(ellipse at 10% 90%, var(--lite-mint-bg), transparent 55%),
+    linear-gradient(180deg, #eaf3ec 0%, #f3f8f5 50%, #e5f1ea 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ヘッダー */
+
+.lite-header {
+  position: relative;
+  z-index: 1;
+  padding: 24px 0 0;
+}
+
+.lite-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 32px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.lite-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--lite-fg);
+}
+
+.lite-brand .mark {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--lite-accent) 0%, var(--lite-accent-deep) 100%);
+  color: #fff;
+  font-size: 24px;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.12),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+}
+
+.lite-brand:hover .mark {
+  transform: scale(1.05);
+}
+
+.lite-brand .name {
+  font-family: var(--font-jp-serif);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.lite-brand .en {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--lite-accent-deep);
+  margin-top: 6px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.lite-nav {
+  display: flex;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.lite-nav a {
+  color: var(--lite-fg);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-weight: 500;
+  transition: background 0.25s, color 0.25s;
+}
+
+.lite-nav a:hover {
+  background: var(--lite-accent-bg);
+  color: var(--lite-accent-deep);
+}
+
+/* メイン */
+
+.lite-main {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 32px 96px;
+}
+
+/* ヒーロー */
+
+.lite-hero {
+  text-align: center;
+  margin-bottom: 64px;
+  padding: 24px 16px;
+}
+
+.lite-hero .eyebrow {
+  display: inline-block;
+  font-family: var(--font-en);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--lite-accent-deep);
+  margin-bottom: 22px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  background: var(--lite-accent-bg);
+  border-radius: 100px;
+  font-weight: 700;
+}
+
+.lite-hero h1 {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(34px, 6vw, 56px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+  color: var(--lite-fg);
+}
+
+.lite-hero h1 .accent {
+  background: linear-gradient(120deg, var(--lite-accent-deep) 0%, var(--lite-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lite-hero p {
+  font-size: 15px;
+  line-height: 2;
+  max-width: 540px;
+  margin: 0 auto;
+  color: var(--lite-fg-soft);
+}
+
+/* リンクカード */
+
+.lite-links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin-bottom: 64px;
+}
+
+.lite-link {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 22px;
+  padding: 28px 30px;
+  background: var(--lite-bg-card);
+  border: 1px solid var(--lite-line);
+  border-radius: 20px;
+  text-decoration: none;
+  color: var(--lite-fg);
+  box-shadow: var(--lite-shadow);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.lite-link::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--lite-accent), var(--lite-accent-deep));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.lite-link:hover {
+  transform: translateY(-4px);
+  border-color: var(--lite-accent);
+  box-shadow: var(--lite-shadow-lift);
+}
+
+.lite-link:hover::before { opacity: 1; }
+
+.lite-link-icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: var(--lite-accent-bg);
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.lite-link-body {
+  min-width: 0;
+}
+
+.lite-link-name {
+  font-family: var(--font-jp-serif);
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  letter-spacing: 0.02em;
+}
+
+.lite-link-en {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--lite-accent-deep);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.lite-link-desc {
+  font-size: 13px;
+  color: var(--lite-fg-soft);
+  line-height: 1.75;
+}
+
+.lite-link-arrow {
+  font-family: var(--font-en);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--lite-accent-deep);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* お知らせブロック */
+
+.lite-note {
+  text-align: center;
+  padding: 32px;
+  border-radius: 18px;
+  background: var(--lite-bg-card);
+  border: 1px dashed var(--lite-line);
+  color: var(--lite-fg-soft);
+  font-size: 13.5px;
+  line-height: 1.95;
+}
+
+.lite-note strong {
+  color: var(--lite-accent-deep);
+  font-weight: 700;
+}
+
+/* フッター */
+
+.lite-footer {
+  position: relative;
+  z-index: 1;
+  padding: 28px 32px;
+}
+
+.lite-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.lite-footer .brand {
+  font-family: var(--font-jp-serif);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--lite-fg-soft);
+  font-weight: 700;
+}
+
+.lite-footer .links {
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+}
+
+.lite-footer .links a {
+  color: var(--lite-fg-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lite-footer .links a:hover {
+  color: var(--lite-accent-deep);
+}
+
+.lite-footer .meta {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--lite-fg-mute);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .lite-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px 20px 24px;
+  }
+  .lite-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  .lite-main {
+    padding: 32px 20px 64px;
+  }
+  .lite-link {
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    padding: 22px 22px;
+  }
+  .lite-link-arrow {
+    display: none;
+  }
+}

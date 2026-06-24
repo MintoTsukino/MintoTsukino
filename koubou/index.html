@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>みんとの工房 — 月ノみんとの自作アプリ・ツール</title>
+<meta name="description" content="月ノみんとの工房。執筆アプリNovelStone、音響ツールみんと食堂、自作プラグインなど、ものづくりの成果置き場。">
+<meta property="og:title" content="みんとの工房 — Workshop">
+<meta property="og:description" content="NovelStone、みんと食堂、GitHubなど、月ノみんとが作ったアプリ・ツールの置き場。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mintotsukino.github.io/MintoTsukino/koubou/">
+<meta property="og:image" content="https://mintotsukino.github.io/MintoTsukino/assets/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-jp-serif: "Noto Serif JP", "Yu Mincho", "游明朝", serif;
+    --font-jp-sans: "Noto Sans JP", "Yu Gothic", "游ゴシック", sans-serif;
+    --font-en: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-jp-sans);
+    line-height: 1.75;
+    font-size: 16px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .featured {
+    margin-bottom: 28px;
+    padding: 36px 40px;
+    background:
+      linear-gradient(135deg, rgba(214, 143, 90, 0.1) 0%, transparent 60%),
+      var(--lite-bg-card);
+    border: 1px solid var(--lite-line);
+    border-radius: 22px;
+    box-shadow: var(--lite-shadow);
+    text-decoration: none;
+    color: var(--lite-fg);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+  }
+  .featured:hover {
+    transform: translateY(-4px);
+    border-color: var(--lite-accent);
+    box-shadow: var(--lite-shadow-lift);
+  }
+  .featured::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lite-accent), var(--lite-accent-deep));
+  }
+  .featured-tag {
+    display: inline-block;
+    font-family: var(--font-en);
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--lite-accent-deep);
+    background: var(--lite-accent-bg);
+    padding: 5px 12px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .featured h2 {
+    font-family: var(--font-jp-serif);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+  .featured h2 small {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--lite-fg-soft);
+    margin-top: 2px;
+    letter-spacing: 0.15em;
+  }
+  .featured .catch {
+    font-size: 14px;
+    color: var(--lite-fg-soft);
+    line-height: 1.85;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .featured .features-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    font-size: 12px;
+    color: var(--lite-fg-soft);
+  }
+  .featured .features-list li::before {
+    content: "✦ ";
+    color: var(--lite-accent-deep);
+    font-weight: 700;
+  }
+  .featured .meta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    font-family: var(--font-en);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--lite-fg-mute);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .featured .meta-row span {
+    padding: 3px 10px;
+    border: 1px solid var(--lite-line);
+    border-radius: 100px;
+  }
+  .featured-icon {
+    width: 96px;
+    height: 96px;
+    display: grid;
+    place-items: center;
+    border-radius: 24px;
+    background: var(--lite-accent-bg);
+    font-size: 48px;
+    flex-shrink: 0;
+  }
+  .featured-cta {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    font-family: var(--font-en);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--lite-accent-deep);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  @media (max-width: 640px) {
+    .featured {
+      grid-template-columns: 1fr;
+      padding: 28px 22px;
+      text-align: center;
+    }
+    .featured-icon {
+      margin: 0 auto;
+    }
+    .featured .features-list {
+      justify-content: center;
+    }
+  }
+</style>
+<link rel="stylesheet" href="../assets/css/lite-room.css">
+</head>
+<body class="theme-lite theme-koubou">
+
+<header class="lite-header">
+  <div class="lite-inner">
+    <a href="./" class="lite-brand">
+      <span class="mark">🛠️</span>
+      <div>
+        <div class="name">みんとの工房</div>
+        <div class="en">MINTO TSUKINO &middot; WORKSHOP</div>
+      </div>
+    </a>
+    <nav class="lite-nav">
+      <a href="../">玄関</a>
+      <a href="./">工房</a>
+      <a href="../shosai/">書斎</a>
+      <a href="../shokudo/">食堂</a>
+      <a href="../about/#contact">連絡先</a>
+    </nav>
+  </div>
+</header>
+
+<main class="lite-main">
+
+  <section class="lite-hero">
+    <div class="eyebrow">Workshop &middot; Ones I Built</div>
+    <h1>みんとの<span class="accent">工房</span>。</h1>
+    <p>
+      自分が欲しかったから、自分の手で作ったもの。<br>
+      アプリ、ツール、プラグイン ── ものづくりの成果置き場です。
+    </p>
+  </section>
+
+  <a href="novelstone/" class="featured">
+    <div>
+      <span class="featured-tag">Featured &middot; Writing App</span>
+      <h2>
+        ノベルストーン
+        <small>NovelStone &middot; 執筆アプリ for Steam</small>
+      </h2>
+      <p class="catch">「書くほどレベルが上がる。物語を紡ぐ冒険が、ここから始まる。」</p>
+      <ul class="features-list">
+        <li>ポモドーロタイマー</li>
+        <li>辞書機能</li>
+        <li>メモ帳</li>
+        <li>縦書き対応</li>
+        <li>PDF出力</li>
+        <li>RPG風UI</li>
+      </ul>
+      <div class="meta-row">
+        <span>Windows 10/11 (64-bit)</span>
+        <span>¥1,200</span>
+        <span>Steam Cloud</span>
+      </div>
+    </div>
+    <div class="featured-icon">📚</div>
+    <span class="featured-cta">詳しく見る →</span>
+  </a>
+
+  <div class="lite-links">
+
+    <a href="../shokudo/" class="lite-link">
+      <span class="lite-link-icon">🏮</span>
+      <div class="lite-link-body">
+        <div class="lite-link-en">Audio Tools Series</div>
+        <div class="lite-link-name">みんと食堂 シリーズ</div>
+        <p class="lite-link-desc">ブラウザツール、デスクトップアプリ、VSTプラグインの音づくりシリーズ。すべて無料配布中。</p>
+      </div>
+      <span class="lite-link-arrow">OPEN →</span>
+    </a>
+
+    <a href="https://github.com/MintoTsukino/ai-audio-analyzer" target="_blank" rel="noopener" class="lite-link">
+      <span class="lite-link-icon">🎧</span>
+      <div class="lite-link-body">
+        <div class="lite-link-en">OSS · Python · MIT</div>
+        <div class="lite-link-name">ai-audio-analyzer</div>
+        <p class="lite-link-desc">「AIアシスタントに耳をつける」Pythonスクリプト。テンポ・キー・周波数・ジャンル・歌詞・LUFSなどを数値化してAIに渡せる形にします。AIペアでの音楽制作のために。</p>
+      </div>
+      <span class="lite-link-arrow">GITHUB →</span>
+    </a>
+
+    <a href="https://github.com/MintoTsukino/claude-novel-workflow" target="_blank" rel="noopener" class="lite-link">
+      <span class="lite-link-icon">🤖</span>
+      <div class="lite-link-body">
+        <div class="lite-link-en">OSS · Claude Code · Workflow</div>
+        <div class="lite-link-name">claude-novel-workflow</div>
+        <p class="lite-link-desc">商業ライトノベル作家のためのカノン駆動・マルチエージェント執筆ワークフロー。実例として <strong>96分で20章 / 13.7万字</strong> を生成した実プロジェクト一式を公開しています。</p>
+      </div>
+      <span class="lite-link-arrow">GITHUB →</span>
+    </a>
+
+    <a href="rpgmaker-plugins/" class="lite-link">
+      <span class="lite-link-icon">🧩</span>
+      <div class="lite-link-body">
+        <div class="lite-link-en">RPG Maker MZ · 5 Plugins</div>
+        <div class="lite-link-name">RPGツクールMZ用プラグイン集</div>
+        <p class="lite-link-desc">MintoSoft制作のRPGツクールMZ用プラグイン5本。エンジン最適化、ポストエフェクト、ライト演出、ワープ魔法など。すべて無料・商用OK。</p>
+      </div>
+      <span class="lite-link-arrow">OPEN →</span>
+    </a>
+
+    <a href="https://github.com/MintoTsukino" target="_blank" rel="noopener" class="lite-link">
+      <span class="lite-link-icon">🐙</span>
+      <div class="lite-link-body">
+        <div class="lite-link-en">GitHub</div>
+        <div class="lite-link-name">月ノみんとの GitHub</div>
+        <p class="lite-link-desc">そのほかの公開リポジトリ・コード置き場。技術的なものはこちらにまとまっています。</p>
+      </div>
+      <span class="lite-link-arrow">VIEW →</span>
+    </a>
+
+  </div>
+
+  <div class="lite-note">
+    🛠️ 工房は <strong>「自分の手で作ったもの」専用</strong> の置き場です。<br>
+    執筆アプリ、音響ツール、自作プラグインなど、これからも少しずつ並べていきます。<br>
+    お仕事のご依頼は <a href="../about/#contact" style="color: var(--lite-accent-deep); font-weight: 700;">連絡先</a> まで。
+  </div>
+
+</main>
+
+<footer class="lite-footer">
+  <div class="lite-footer-inner">
+    <div class="brand">🛠️ みんとの工房</div>
+    <div class="links">
+      <a href="../">玄関</a>
+      <a href="../shokudo/">食堂</a>
+      <a href="../shosai/">書斎</a>
+      <a href="../about/#contact">連絡先</a>
+    </div>
+    <div class="meta">© Minto Tsukino · 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
